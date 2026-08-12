@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "InternLog (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "InternLog (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
