@@ -1,0 +1,17 @@
+<Page
+    x:Class="InternLog.Pages.ProfilePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Background="#F5F6F8">
+
+        <TextBlock
+            Text="Profile"
+            FontSize="32"
+            FontWeight="Bold"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"/>
+
+    </Grid>
+
+</Page>

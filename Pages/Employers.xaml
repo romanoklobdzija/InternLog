@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Page
+    x:Class="InternLog.Pages.EmployersPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer>
+        <Grid
+            Padding="40"
+            Background="#F5F6F8">
+
+            <StackPanel Spacing="24">
+
+                <!-- HEADER -->
+                <StackPanel Spacing="6">
+
+                    <TextBlock
+                        Text="Employers"
+                        FontSize="32"
+                        FontWeight="Bold"
+                        Foreground="#111827"/>
+
+                    <TextBlock
+                        Text="Explore employers and find an internship opportunity that suits you."
+                        FontSize="15"
+                        Foreground="#6B7280"/>
+
+                </StackPanel>
+
+
+                <!-- SEARCH -->
+                <TextBox
+                    x:Name="SearchTextBox"
+                    PlaceholderText="Search employers..."
+                    Height="42"
+                    Background="White"
+                    BorderBrush="#D1D5DB"
+                    BorderThickness="1"/>
+
+
+                <!-- EMPLOYERS GRID -->
+                <GridView
+                    x:Name="EmployersGridView"
+                    IsItemClickEnabled="True"
+                    SelectionMode="None"
+                    ItemClick="Employer_ItemClick">
+
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsWrapGrid
+                                Orientation="Horizontal"
+                                MaximumRowsOrColumns="3"/>
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+
+
+                    <!-- PLACEHOLDER 1 -->
+                    <GridViewItem>
+
+                        <Border
+                            Width="300"
+                            Margin="0,0,20,20"
+                            Padding="24"
+                            Background="White"
+                            CornerRadius="12">
+
+                            <StackPanel Spacing="12">
+
+                                <TextBlock
+                                    Text="Konto d.o.o."
+                                    FontSize="20"
+                                    FontWeight="SemiBold"
+                                    Foreground="#111827"/>
+
+                                <TextBlock
+                                    Text="Software Development"
+                                    FontSize="14"
+                                    Foreground="#6B7280"/>
+
+                                <TextBlock
+                                    Text="Požega"
+                                    FontSize="13"
+                                    Foreground="#6B7280"/>
+
+                                <TextBlock
+                                    Text="3 available internship positions"
+                                    FontSize="13"
+                                    Foreground="#374151"
+                                    Margin="0,8,0,0"/>
+
+                                <Button
+                                    Content="View details"
+                                    HorizontalAlignment="Left"
+                                    Background="#2563EB"
+                                    Foreground="White"
+                                    BorderThickness="0"/>
+
+                            </StackPanel>
+
+                        </Border>
+
+                    </GridViewItem>
+
+
+                    <!-- PLACEHOLDER 2 -->
+                    <GridViewItem>
+
+                        <Border
+                            Width="300"
+                            Margin="0,0,20,20"
+                            Padding="24"
+                            Background="White"
+                            CornerRadius="12">
+
+                            <StackPanel Spacing="12">
+
+                                <TextBlock
+                                    Text="TechNova d.o.o."
+                                    FontSize="20"
+                                    FontWeight="SemiBold"
+                                    Foreground="#111827"/>
+
+                                <TextBlock
+                                    Text="Information Technology"
+                                    FontSize="14"
+                                    Foreground="#6B7280"/>
+
+                                <TextBlock
+                                    Text="Varaždin"
+                                    FontSize="13"
+                                    Foreground="#6B7280"/>
+
+                                <TextBlock
+                                    Text="2 available internship positions"
+                                    FontSize="13"
+                                    Foreground="#374151"
+                                    Margin="0,8,0,0"/>
+
+                                <Button
+                                    Content="View details"
+                                    HorizontalAlignment="Left"
+                                    Background="#2563EB"
+                                    Foreground="White"
+                                    BorderThickness="0"/>
+
+                            </StackPanel>
+
+                        </Border>
+
+                    </GridViewItem>
+
+
+                    <!-- PLACEHOLDER 3 -->
+                    <GridViewItem>
+
+                        <Border
+                            Width="300"
+                            Margin="0,0,20,20"
+                            Padding="24"
+                            Background="White"
+                            CornerRadius="12">
+
+                            <StackPanel Spacing="12">
+
+                                <TextBlock
+                                    Text="Digital Solutions"
+                                    FontSize="20"
+                                    FontWeight="SemiBold"
+                                    Foreground="#111827"/>
+
+                                <TextBlock
+                                    Text="Digital Services"
+                                    FontSize="14"
+                                    Foreground="#6B7280"/>
+
+                                <TextBlock
+                                    Text="Zagreb"
+                                    FontSize="13"
+                                    Foreground="#6B7280"/>
+
+                                <TextBlock
+                                    Text="5 available internship positions"
+                                    FontSize="13"
+                                    Foreground="#374151"
+                                    Margin="0,8,0,0"/>
+
+                                <Button
+                                    Content="View details"
+                                    HorizontalAlignment="Left"
+                                    Background="#2563EB"
+                                    Foreground="White"
+                                    BorderThickness="0"/>
+
+                            </StackPanel>
+
+                        </Border>
+
+                    </GridViewItem>
+
+                </GridView>
+
+            </StackPanel>
+
+        </Grid>
+
+    </ScrollViewer>
+
+</Page>

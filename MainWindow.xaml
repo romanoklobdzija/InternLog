@@ -1,247 +1,185 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Window
     x:Class="InternLog.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:InternLog"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
     Title="InternLog">
 
-    <Window.SystemBackdrop>
-        <MicaBackdrop />
-    </Window.SystemBackdrop>
+    <Grid>
 
-    <Grid Background="#F5F6F8">
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="240"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-        <!-- SIDEBAR -->
-        <Border
-        Grid.Column="0"
-        Background="#4272f5"
-        Padding="20">
-
-            <Grid>
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <!-- LOGO -->
-                <StackPanel Spacing="4">
-                    <TextBlock
-                    Text="InternLog"
-                    FontSize="26"
-                    FontWeight="Bold"
-                    Foreground="White"/>
-
-                    <TextBlock
-                    Text="Internship tracker"
-                    FontSize="13"
-                    Foreground="#9CA3AF"/>
-                </StackPanel>
+        <!-- AUTHENTICATION AREA -->
+        <Frame
+            x:Name="AuthenticationFrame"
+            Visibility="Visible"/>
 
 
-                <!-- NAVIGATION -->
-                <StackPanel
-                Grid.Row="1"
-                Margin="0,40,0,0"
-                Spacing="8">
-
-                    <Button
-                    Content="Dashboard"
-                    HorizontalContentAlignment="Left"
-                    Height="44"/>
-
-                    <Button
-                    Content="Daily Log"
-                    HorizontalContentAlignment="Left"
-                    Height="44"/>
-
-                    <Button
-                    Content="Calendar"
-                    HorizontalContentAlignment="Left"
-                    Height="44"/>
-
-                    <Button
-                    Content="Statistics"
-                    HorizontalContentAlignment="Left"
-                    Height="44"/>
-
-                    <Button
-                    Content="Profile"
-                    HorizontalContentAlignment="Left"
-                    Height="44"/>
-
-                </StackPanel>
-
-
-                <!-- BOTTOM -->
-                <TextBlock
-                Grid.Row="2"
-                Text="InternLog 2026"
-                Foreground="#9CA3AF"
-                FontSize="12"/>
-
-            </Grid>
-
-        </Border>
-
-
-        <!-- MAIN CONTENT -->
+        <!-- MAIN APPLICATION -->
         <Grid
-        Grid.Column="1"
-        Padding="40">
+            x:Name="ApplicationView"
+            Visibility="Collapsed"
+            Background="#F5F6F8">
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-
-            <!-- HEADER -->
-            <StackPanel Spacing="6">
-
-                <TextBlock
-                Text="Dashboard"
-                FontSize="32"
-                FontWeight="Bold"
-                Foreground="#111827"/>
-
-                <TextBlock
-                Text="Welcome back. Here's an overview of your internship."
-                FontSize="15"
-                Foreground="#6B7280"/>
-
-            </StackPanel>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="240"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
 
-            <!-- STAT CARDS -->
-            <Grid
-            Grid.Row="1"
-            Margin="0,30,0,0">
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-
-
-                <!-- HOURS -->
-                <Border
+            <!-- SIDEBAR -->
+            <Border
                 Grid.Column="0"
                 Background="White"
-                CornerRadius="12"
-                Padding="24"
-                Margin="0,0,10,0">
+                BorderBrush="#E5E7EB"
+                BorderThickness="0,0,1,0">
 
-                    <StackPanel Spacing="8">
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+
+                    <!-- HEADER -->
+                    <StackPanel
+                        Grid.Row="0"
+                        Margin="24,30,24,30">
 
                         <TextBlock
-                        Text="Total Hours"
-                        FontSize="14"
-                        Foreground="#6B7280"/>
+                            Text="InternLog"
+                            FontSize="26"
+                            FontWeight="Bold"
+                            Foreground="#111827"/>
 
                         <TextBlock
-                        Text="56 h"
-                        FontSize="28"
-                        FontWeight="Bold"
-                        Foreground="#111827"/>
+                            Text="Internship tracker"
+                            FontSize="12"
+                            Foreground="#6B7280"
+                            Margin="0,4,0,0"/>
 
                     </StackPanel>
 
-                </Border>
+
+                    <!-- NAVIGATION -->
+                    <StackPanel
+                        Grid.Row="1"
+                        Spacing="8"
+                        Margin="12,0">
+
+                        <!-- HOME -->
+                        <Button
+                            Content="Home"
+                            Height="44"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Left"
+                            Padding="16,0"
+                            Background="#F3F4F6"
+                            Foreground="#111827"
+                            BorderThickness="0"
+                            Click="HomeButton_Click"/>
 
 
-                <!-- DAYS -->
-                <Border
-                Grid.Column="1"
-                Background="White"
-                CornerRadius="12"
-                Padding="24"
-                Margin="10,0,10,0">
+                        <!-- EMPLOYERS -->
+                        <Button
+                            Content="Employers"
+                            Height="44"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Left"
+                            Padding="16,0"
+                            Background="#F3F4F6"
+                            Foreground="#111827"
+                            BorderThickness="0"
+                            Click="EmployersButton_Click"/>
 
-                    <StackPanel Spacing="8">
 
-                        <TextBlock
-                        Text="Days Completed"
-                        FontSize="14"
-                        Foreground="#6B7280"/>
+                        <!-- DAILY LOG -->
+                        <Button
+                            Content="Daily Log"
+                            Height="44"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Left"
+                            Padding="16,0"
+                            Background="#F3F4F6"
+                            Foreground="#111827"
+                            BorderThickness="0"
+                            Click="DailyLogButton_Click"/>
 
-                        <TextBlock
-                        Text="7"
-                        FontSize="28"
-                        FontWeight="Bold"
-                        Foreground="#111827"/>
+
+                        <!-- DASHBOARD -->
+                        <Button
+                            Content="Dashboard"
+                            Height="44"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Left"
+                            Padding="16,0"
+                            Background="#F3F4F6"
+                            Foreground="#111827"
+                            BorderThickness="0"
+                            Click="DashboardButton_Click"/>
+
+
+                        <!-- PROFILE -->
+                        <Button
+                            Content="Profile"
+                            Height="44"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Left"
+                            Padding="16,0"
+                            Background="#F3F4F6"
+                            Foreground="#111827"
+                            BorderThickness="0"
+                            Click="ProfileButton_Click"/>
+
+
 
                     </StackPanel>
 
-                </Border>
 
+                    <!-- BOTTOM NAVIGATION -->
+                    <StackPanel
+    Grid.Row="2"
+    Spacing="8"
+    Margin="12,12,12,24">
 
-                <!-- PROGRESS -->
-                <Border
-                Grid.Column="2"
-                Background="White"
-                CornerRadius="12"
-                Padding="24"
-                Margin="10,0,0,0">
+                        <!-- SETTINGS -->
+                        <Button
+                            Content="Settings"
+                            Height="44"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Left"
+                            Padding="16,0"
+                            Background="#F3F4F6"
+                            Foreground="#111827"
+                            BorderThickness="0"
+                            Click="SettingsButton_Click"/>
 
-                    <StackPanel Spacing="8">
-
-                        <TextBlock
-                        Text="Progress"
-                        FontSize="14"
-                        Foreground="#6B7280"/>
-
-                        <TextBlock
-                        Text="35%"
-                        FontSize="28"
-                        FontWeight="Bold"
-                        Foreground="#111827"/>
+                        <!-- LOGOUT -->
+                        <Button
+                            Content="Log out"
+                            Height="44"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Left"
+                            Padding="16,0"
+                            Background="#FEE2E2"
+                            Foreground="#B91C1C"
+                            BorderThickness="0"
+                            Click="LogoutButton_Click"/>
 
                     </StackPanel>
 
-                </Border>
 
-            </Grid>
-
-
-            <!-- RECENT ACTIVITY -->
-            <Border
-            Grid.Row="2"
-            Background="White"
-            CornerRadius="12"
-            Padding="24"
-            Margin="0,30,0,0">
-
-                <StackPanel Spacing="15">
-
-                    <TextBlock
-                    Text="Recent Activity"
-                    FontSize="20"
-                    FontWeight="SemiBold"
-                    Foreground="#111827"/>
-
-                    <TextBlock
-                    Text="No recent entries."
-                    FontSize="14"
-                    Foreground="#6B7280"/>
-
-                </StackPanel>
+                </Grid>
 
             </Border>
+
+
+            <!-- PAGE CONTENT -->
+            <Frame
+                x:Name="ContentFrame"
+                Grid.Column="1"/>
 
         </Grid>
 
     </Grid>
+
 </Window>
