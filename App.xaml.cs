@@ -13,7 +13,9 @@ namespace InternLog
 
             using (var db = new AppDbContext())
             {
+                //db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
+                DatabaseSeeder.SeedEmployers(db);
             }
         }
 

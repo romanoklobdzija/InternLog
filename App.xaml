@@ -1,16 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <Application
     x:Class="InternLog.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:InternLog">
+
     <Application.Resources>
+
         <ResourceDictionary>
+
             <ResourceDictionary.MergedDictionaries>
-                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-                <!-- Other merged dictionaries here -->
+
+                <XamlControlsResources
+                    xmlns="using:Microsoft.UI.Xaml.Controls" />
+
             </ResourceDictionary.MergedDictionaries>
-            <!-- Other app resources here -->
+
+
+            <!-- ================================================= -->
+            <!-- BUTTON - GLOBAL HOVER / PRESSED                  -->
+            <!-- ================================================= -->
+
+            <SolidColorBrush
+                x:Key="ButtonBackgroundPointerOver"
+                Color="#2563EB" />
+
+            <SolidColorBrush
+                x:Key="ButtonForegroundPointerOver"
+                Color="White" />
+
+            <SolidColorBrush
+                x:Key="ButtonBorderBrushPointerOver"
+                Color="#2563EB" />
+
+            <SolidColorBrush
+                x:Key="ButtonBackgroundPressed"
+                Color="#2563EB" />
+
+            <SolidColorBrush
+                x:Key="ButtonForegroundPressed"
+                Color="White" />
+
+            <SolidColorBrush
+                x:Key="ButtonBorderBrushPressed"
+                Color="#2563EB" />
+
+
+            <!-- ================================================= -->
+            <!-- TEXTBOX - GLOBAL HOVER / FOCUS                   -->
+            <!-- ================================================= -->
+
+            <SolidColorBrush
+                x:Key="TextControlBackgroundPointerOver"
+                Color="White" />
+
+            <SolidColorBrush
+                x:Key="TextControlBackgroundFocused"
+                Color="White" />
+
+            <SolidColorBrush
+                x:Key="TextControlForeground"
+                Color="#172033" />
+
+            <SolidColorBrush
+                x:Key="TextControlForegroundPointerOver"
+                Color="#172033" />
+
+            <SolidColorBrush
+                x:Key="TextControlForegroundFocused"
+                Color="#172033" />
+
+            <SolidColorBrush
+                x:Key="TextControlPlaceholderForeground"
+                Color="#6B7280" />
+
+            <SolidColorBrush
+                x:Key="TextControlPlaceholderForegroundPointerOver"
+                Color="#6B7280" />
+
+            <SolidColorBrush
+                x:Key="TextControlPlaceholderForegroundFocused"
+                Color="#6B7280" />
+
+
+            <!-- ================================================= -->
+            <!-- COMBOBOX - GLOBAL HOVER / PRESSED                -->
+            <!-- ================================================= -->
+
+            <SolidColorBrush
+                x:Key="ComboBoxBackgroundPointerOver"
+                Color="White" />
+
+            <SolidColorBrush
+                x:Key="ComboBoxBackgroundPressed"
+                Color="White" />
+
+            <SolidColorBrush
+                x:Key="ComboBoxForegroundPointerOver"
+                Color="#172033" />
+
+            <SolidColorBrush
+                x:Key="ComboBoxForegroundPressed"
+                Color="#172033" />
+            <!-- ================================================= -->
+            <!-- TIMEPICKER / DATEPICKER                          -->
+            <!-- ================================================= -->
+
+            <SolidColorBrush
+    x:Key="CalendarDatePickerBackgroundPointerOver"
+    Color="White" />
+
+            <SolidColorBrush
+    x:Key="CalendarDatePickerBackgroundPressed"
+    Color="White" />
+
+
+            <!-- TIMEPICKER BACKGROUND -->
+
+            <SolidColorBrush
+    x:Key="TimePickerButtonBackground"
+    Color="White" />
+
+            <SolidColorBrush
+    x:Key="TimePickerButtonBackgroundPointerOver"
+    Color="White" />
+
+            <SolidColorBrush
+    x:Key="TimePickerButtonBackgroundPressed"
+    Color="White" />
+
+            <SolidColorBrush
+    x:Key="TimePickerButtonBackgroundFocused"
+    Color="White" />
+
+
+            <!-- TIMEPICKER TEXT -->
+
+            <SolidColorBrush
+    x:Key="TimePickerButtonForeground"
+    Color="#172033" />
+
+            <SolidColorBrush
+    x:Key="TimePickerButtonForegroundPointerOver"
+    Color="#172033" />
+
+            <SolidColorBrush
+    x:Key="TimePickerButtonForegroundPressed"
+    Color="#172033" />
+
+            <SolidColorBrush
+    x:Key="TimePickerButtonForegroundFocused"
+    Color="#172033" />
+
+
+            <!-- TIMEPICKER BORDER -->
+
+            <SolidColorBrush
+    x:Key="TimePickerButtonBorderBrush"
+    Color="#D1D5DB" />
+
+            <SolidColorBrush
+    x:Key="TimePickerButtonBorderBrushPointerOver"
+    Color="#D1D5DB" />
+
+            <SolidColorBrush
+    x:Key="TimePickerButtonBorderBrushPressed"
+    Color="#2563EB" />
+
         </ResourceDictionary>
+
     </Application.Resources>
+
 </Application>

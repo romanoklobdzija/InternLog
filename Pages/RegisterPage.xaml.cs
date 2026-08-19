@@ -78,6 +78,7 @@ public sealed partial class RegisterPage : Page
 
         await ShowMessage(
             "Your account has been successfully created!");
+        Frame.Navigate(typeof(LoginPage));
     }
 
 

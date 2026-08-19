@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
@@ -15,7 +15,7 @@
   <ItemGroup>
     <None Remove="Pages\DailyLogPage.xaml" />
     <None Remove="Pages\DashboardPage.xaml" />
-    <None Remove="Pages\Employers.xaml" />
+    <None Remove="Pages\EmployerDetailsPage.xaml" />
     <None Remove="Pages\HomePage.xaml" />
     <None Remove="Pages\LoginPage.xaml" />
     <None Remove="Pages\ProfilePage.xaml" />
@@ -51,7 +51,12 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Pages\Employers.xaml">
+    <Page Update="Pages\EmployerDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\EmployersPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
