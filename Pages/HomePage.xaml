@@ -7,25 +7,137 @@
 
     <Grid Background="#F5F6F8">
 
-        <StackPanel
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            Spacing="12">
+        <ScrollViewer
+            HorizontalScrollBarVisibility="Disabled"
+            VerticalScrollBarVisibility="Auto">
 
-            <TextBlock
-                Text="Welcome to InternLog"
-                FontSize="32"
-                FontWeight="Bold"
-                Foreground="#111827"
-                HorizontalAlignment="Center"/>
+            <StackPanel
+                Margin="40"
+                Spacing="24">
 
-            <TextBlock
-                x:Name="WelcomeTextBlock"
-                FontSize="18"
-                Foreground="#6B7280"
-                HorizontalAlignment="Center"/>
+                <!-- HEADER -->
+                <StackPanel Spacing="6">
 
-        </StackPanel>
+                    <TextBlock
+                        Text="My Internships"
+                        FontSize="32"
+                        FontWeight="Bold"
+                        Foreground="#111827"/>
+
+                    <TextBlock
+                        Text="Manage your internships and check their current status."
+                        FontSize="16"
+                        Foreground="#6B7280"/>
+
+                </StackPanel>
+
+
+                <!-- INTERNSHIP LIST -->
+                <ItemsControl
+                    x:Name="InternshipsItemsControl">
+
+                    <ItemsControl.ItemTemplate>
+
+                        <DataTemplate>
+
+                            <Border
+                                Background="White"
+                                CornerRadius="12"
+                                Padding="24"
+                                Margin="0,0,0,12">
+
+                                <Grid>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <!-- INTERNSHIP INFO -->
+                                    <StackPanel
+                                        Spacing="8">
+
+                                        <TextBlock
+                                            Text="{Binding Employer.Name}"
+                                            FontSize="22"
+                                            FontWeight="SemiBold"
+                                            Foreground="#111827"/>
+
+                                        <TextBlock
+                                                Text="{Binding StartDate}"
+                                                FontSize="14"
+                                                Foreground="#6B7280"/>
+
+                                        <TextBlock
+                                            Text="{Binding EndDate}"
+                                            FontSize="14"
+                                            Foreground="#6B7280"/>
+                                    </StackPanel>
+
+
+                                    <!-- STATUS -->
+                                    <StackPanel
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Spacing="12">
+
+                                        <Border
+                                            Background="#E8F0FE"
+                                            CornerRadius="8"
+                                            Padding="12,6">
+
+                                            <TextBlock
+                                                Text="{Binding Status}"
+                                                Foreground="#2563EB"
+                                                FontWeight="SemiBold"/>
+
+                                        </Border>
+
+                                        <Button
+                                            Content="View Internship"
+                                            Tag="{Binding Id}"
+                                            Click="ViewInternshipButton_Click"/>
+
+                                    </StackPanel>
+
+                                </Grid>
+
+                            </Border>
+
+                        </DataTemplate>
+
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+
+
+                <!-- EMPTY STATE -->
+                <StackPanel
+                    x:Name="EmptyStatePanel"
+                    HorizontalAlignment="Center"
+                    Spacing="8"
+                    Visibility="Collapsed">
+
+                    <TextBlock
+                        Text="No internships found"
+                        FontSize="22"
+                        FontWeight="SemiBold"
+                        Foreground="#111827"
+                        HorizontalAlignment="Center"/>
+
+                    <TextBlock
+                        Text="You currently don't have any internships."
+                        FontSize="15"
+                        Foreground="#6B7280"
+                        HorizontalAlignment="Center"/>
+
+                </StackPanel>
+
+            </StackPanel>
+
+        </ScrollViewer>
 
     </Grid>
 

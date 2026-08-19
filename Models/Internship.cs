@@ -27,6 +27,10 @@ public class Internship
     public string Status { get; set; } = "Approved";
 
 
+    // Status dnevnika
+    public string JournalStatus { get; set; } = "NotStarted";
+
+
     // Dnevni zapisi
     public ICollection<DailyLog> DailyLogs { get; set; }
         = new List<DailyLog>();

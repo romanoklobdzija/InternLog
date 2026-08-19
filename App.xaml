@@ -19,7 +19,24 @@
 
 
             <!-- ================================================= -->
-            <!-- BUTTON - GLOBAL HOVER / PRESSED                  -->
+            <!-- BUTTON - NORMAL                                  -->
+            <!-- ================================================= -->
+
+            <SolidColorBrush
+                x:Key="ButtonBackground"
+                Color="#2563EB" />
+
+            <SolidColorBrush
+                x:Key="ButtonForeground"
+                Color="White" />
+
+            <SolidColorBrush
+                x:Key="ButtonBorderBrush"
+                Color="#2563EB" />
+
+
+            <!-- ================================================= -->
+            <!-- BUTTON - HOVER / PRESSED                         -->
             <!-- ================================================= -->
 
             <SolidColorBrush
@@ -103,70 +120,27 @@
             <SolidColorBrush
                 x:Key="ComboBoxForegroundPressed"
                 Color="#172033" />
+
+
             <!-- ================================================= -->
             <!-- TIMEPICKER / DATEPICKER                          -->
             <!-- ================================================= -->
 
             <SolidColorBrush
-    x:Key="CalendarDatePickerBackgroundPointerOver"
-    Color="White" />
+                x:Key="CalendarDatePickerBackgroundPointerOver"
+                Color="White" />
 
             <SolidColorBrush
-    x:Key="CalendarDatePickerBackgroundPressed"
-    Color="White" />
-
-
-            <!-- TIMEPICKER BACKGROUND -->
+                x:Key="CalendarDatePickerBackgroundPressed"
+                Color="White" />
 
             <SolidColorBrush
-    x:Key="TimePickerButtonBackground"
-    Color="White" />
+                x:Key="TimePickerButtonBackgroundPointerOver"
+                Color="White" />
 
             <SolidColorBrush
-    x:Key="TimePickerButtonBackgroundPointerOver"
-    Color="White" />
-
-            <SolidColorBrush
-    x:Key="TimePickerButtonBackgroundPressed"
-    Color="White" />
-
-            <SolidColorBrush
-    x:Key="TimePickerButtonBackgroundFocused"
-    Color="White" />
-
-
-            <!-- TIMEPICKER TEXT -->
-
-            <SolidColorBrush
-    x:Key="TimePickerButtonForeground"
-    Color="#172033" />
-
-            <SolidColorBrush
-    x:Key="TimePickerButtonForegroundPointerOver"
-    Color="#172033" />
-
-            <SolidColorBrush
-    x:Key="TimePickerButtonForegroundPressed"
-    Color="#172033" />
-
-            <SolidColorBrush
-    x:Key="TimePickerButtonForegroundFocused"
-    Color="#172033" />
-
-
-            <!-- TIMEPICKER BORDER -->
-
-            <SolidColorBrush
-    x:Key="TimePickerButtonBorderBrush"
-    Color="#D1D5DB" />
-
-            <SolidColorBrush
-    x:Key="TimePickerButtonBorderBrushPointerOver"
-    Color="#D1D5DB" />
-
-            <SolidColorBrush
-    x:Key="TimePickerButtonBorderBrushPressed"
-    Color="#2563EB" />
+                x:Key="TimePickerButtonBackgroundPressed"
+                Color="White" />
 
         </ResourceDictionary>
 

@@ -26,7 +26,6 @@ public sealed partial class EmployerDetailsPage : Page
         if (e.Parameter is Employer employer)
         {
             _employer = employer;
-
             LoadEmployerData();
         }
     }
@@ -87,12 +86,18 @@ public sealed partial class EmployerDetailsPage : Page
         bool alreadyReserved = await db.Internships
             .AnyAsync(i =>
                 i.UserId == SessionService.CurrentUser.Id &&
-                i.EmployerId == _employer.Id);
+                i.EmployerId == _employer.Id &&
+                i.Status != "Cancelled");
 
         if (alreadyReserved)
         {
             ReserveButton.Content = "Reserved ✓";
             ReserveButton.IsEnabled = false;
+        }
+        else
+        {
+            ReserveButton.Content = "Reserve Internship";
+            ReserveButton.IsEnabled = _employer.StudentCapacity > 0;
         }
     }
 
@@ -103,7 +108,6 @@ public sealed partial class EmployerDetailsPage : Page
         if (_employer == null)
             return;
 
-        // 1. Provjera je li korisnik prijavljen
         if (SessionService.CurrentUser == null)
         {
             await ShowMessage(
@@ -114,7 +118,6 @@ public sealed partial class EmployerDetailsPage : Page
 
         using var db = new AppDbContext();
 
-        // 2. Učitavanje najnovijih podataka o employeru iz baze
         var employer = await db.Employers
             .FirstOrDefaultAsync(e => e.Id == _employer.Id);
 
@@ -126,11 +129,12 @@ public sealed partial class EmployerDetailsPage : Page
             return;
         }
 
-        // 3. Provjera je li korisnik već rezervirao ovaj internship
+        // Provjera samo aktivnih rezervacija
         bool alreadyReserved = await db.Internships
             .AnyAsync(i =>
                 i.UserId == SessionService.CurrentUser.Id &&
-                i.EmployerId == employer.Id);
+                i.EmployerId == employer.Id &&
+                i.Status != "Cancelled");
 
         if (alreadyReserved)
         {
@@ -142,7 +146,6 @@ public sealed partial class EmployerDetailsPage : Page
             return;
         }
 
-        // 4. Provjera slobodnih mjesta
         if (employer.StudentCapacity <= 0)
         {
             await ShowMessage(
@@ -151,10 +154,11 @@ public sealed partial class EmployerDetailsPage : Page
             return;
         }
 
-        // 5. Provjera maksimalnog broja internshipa
+        // Broje se samo aktivne prakse
         int internshipCount = await db.Internships
             .CountAsync(i =>
-                i.UserId == SessionService.CurrentUser.Id);
+                i.UserId == SessionService.CurrentUser.Id &&
+                i.Status != "Cancelled");
 
         if (internshipCount >= 3)
         {
@@ -164,7 +168,6 @@ public sealed partial class EmployerDetailsPage : Page
             return;
         }
 
-        // 6. Confirmation dialog
         var dialog = new ContentDialog
         {
             Title = "Reserve internship?",
@@ -181,7 +184,6 @@ public sealed partial class EmployerDetailsPage : Page
         if (result != ContentDialogResult.Primary)
             return;
 
-        // 7. Kreiranje internship zapisa
         var internship = new Internship
         {
             UserId = SessionService.CurrentUser.Id,
@@ -193,12 +195,10 @@ public sealed partial class EmployerDetailsPage : Page
 
         db.Internships.Add(internship);
 
-        // 8. Smanjenje broja dostupnih mjesta
         employer.StudentCapacity--;
 
         await db.SaveChangesAsync();
 
-        // 9. Ažuriranje lokalnog prikaza
         _employer.StudentCapacity = employer.StudentCapacity;
 
         PositionsText.Text =

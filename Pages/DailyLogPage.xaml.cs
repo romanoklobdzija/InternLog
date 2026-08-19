@@ -38,6 +38,7 @@ public sealed partial class DailyLogPage : Page
         _internships = await db.Internships
             .Include(i => i.Employer)
             .Where(i => i.UserId == SessionService.CurrentUser.Id)
+            .Where(i => i.Status != "Cancelled")
             .ToListAsync();
 
         CreateInternshipCards();
@@ -64,7 +65,6 @@ public sealed partial class DailyLogPage : Page
         for (int i = 0; i < _internships.Count && i < 3; i++)
         {
             var card = CreateInternshipCard(_internships[i]);
-
             Grid.SetColumn(card, i);
             InternshipsGrid.Children.Add(card);
         }
@@ -324,6 +324,62 @@ public sealed partial class DailyLogPage : Page
     }
 
     // ============================================================
+    // VALIDATE FORM
+    // ============================================================
+
+    private async System.Threading.Tasks.Task<bool> ValidateForm()
+    {
+        if (string.IsNullOrWhiteSpace(DescriptionTextBox.Text))
+        {
+            await ShowValidationMessage("Please fill in what you worked on today.");
+            DescriptionTextBox.Focus(FocusState.Programmatic);
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(TasksTextBox.Text))
+        {
+            await ShowValidationMessage("Please describe the tasks you completed.");
+            TasksTextBox.Focus(FocusState.Programmatic);
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(LearningTextBox.Text))
+        {
+            await ShowValidationMessage("Please describe what you learned.");
+            LearningTextBox.Focus(FocusState.Programmatic);
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(NotesTextBox.Text))
+        {
+            await ShowValidationMessage("Please fill in the notes field.");
+            NotesTextBox.Focus(FocusState.Programmatic);
+            return false;
+        }
+
+        if (EndTimePicker.Time <= StartTimePicker.Time)
+        {
+            await ShowValidationMessage("End time must be later than start time.");
+            return false;
+        }
+
+        return true;
+    }
+
+    private async System.Threading.Tasks.Task ShowValidationMessage(string message)
+    {
+        var dialog = new ContentDialog
+        {
+            Title = "Incomplete daily log",
+            Content = message,
+            CloseButtonText = "OK",
+            XamlRoot = XamlRoot
+        };
+
+        await dialog.ShowAsync();
+    }
+
+    // ============================================================
     // SAVE / UPDATE BUTTON
     // ============================================================
 
@@ -332,87 +388,94 @@ public sealed partial class DailyLogPage : Page
         if (_selectedInternship == null || SessionService.CurrentUser == null)
             return;
 
-        using var db = new AppDbContext();
+        SaveLogButton.IsEnabled = false;
 
-        if (_editingLogId.HasValue)
+        try
         {
-            var existingLog = await db.DailyLogs
-                .FirstOrDefaultAsync(d => d.Id == _editingLogId.Value);
-
-            if (existingLog == null)
+            if (!await ValidateForm())
                 return;
 
-            TimeSpan startTime = StartTimePicker.Time;
-            TimeSpan endTime = EndTimePicker.Time;
-            double totalHours = (endTime - startTime).TotalHours;
+            using var db = new AppDbContext();
 
-            if (totalHours < 0)
-                totalHours = 0;
+            if (_editingLogId.HasValue)
+            {
+                var existingLog = await db.DailyLogs
+                    .FirstOrDefaultAsync(d => d.Id == _editingLogId.Value);
 
-            existingLog.StartTime = startTime;
-            existingLog.EndTime = endTime;
-            existingLog.TotalHours = totalHours;
-            existingLog.Description = DescriptionTextBox.Text;
-            existingLog.Activities = TasksTextBox.Text;
-            existingLog.Learned = LearningTextBox.Text;
-            existingLog.Notes = NotesTextBox.Text;
+                if (existingLog == null)
+                    return;
+
+                TimeSpan startTime = StartTimePicker.Time;
+                TimeSpan endTime = EndTimePicker.Time;
+                double totalHours = (endTime - startTime).TotalHours;
+
+                existingLog.StartTime = startTime;
+                existingLog.EndTime = endTime;
+                existingLog.TotalHours = totalHours;
+                existingLog.Description = DescriptionTextBox.Text.Trim();
+                existingLog.Activities = TasksTextBox.Text.Trim();
+                existingLog.Learned = LearningTextBox.Text.Trim();
+                existingLog.Notes = NotesTextBox.Text.Trim();
+
+                await db.SaveChangesAsync();
+
+                _editingLogId = null;
+                SaveLogButton.Content = "Save daily log";
+
+                ClearForm();
+
+                await LoadDailyLogs();
+
+                DayNumberText.Text = await GetNextDayText(_selectedInternship);
+                DateText.Text = DateTime.Today.ToString("MMMM dd, yyyy");
+
+                return;
+            }
+
+            int nextDayNumber = await db.DailyLogs
+                .Where(d => d.InternshipId == _selectedInternship.Id)
+                .Select(d => (int?)d.DayNumber)
+                .MaxAsync() ?? 0;
+
+            nextDayNumber++;
+
+            TimeSpan newStartTime = StartTimePicker.Time;
+            TimeSpan newEndTime = EndTimePicker.Time;
+            double newTotalHours = (newEndTime - newStartTime).TotalHours;
+
+            var newLog = new DailyLog
+            {
+                InternshipId = _selectedInternship.Id,
+                DayNumber = nextDayNumber,
+                Date = DateTime.Today,
+                StartTime = newStartTime,
+                EndTime = newEndTime,
+                TotalHours = newTotalHours,
+                Description = DescriptionTextBox.Text.Trim(),
+                Activities = TasksTextBox.Text.Trim(),
+                Learned = LearningTextBox.Text.Trim(),
+                Notes = NotesTextBox.Text.Trim(),
+                CreatedAt = DateTime.UtcNow
+            };
+
+            db.DailyLogs.Add(newLog);
 
             await db.SaveChangesAsync();
 
-            _editingLogId = null;
-            SaveLogButton.Content = "Save daily log";
-
             ClearForm();
 
-            await LoadDailyLogs();
+            SaveLogButton.Content = "Save daily log";
 
             DayNumberText.Text = await GetNextDayText(_selectedInternship);
             DateText.Text = DateTime.Today.ToString("MMMM dd, yyyy");
 
-            return;
+            await LoadDailyLogs();
         }
-
-        int nextDayNumber = await db.DailyLogs
-            .Where(d => d.InternshipId == _selectedInternship.Id)
-            .Select(d => (int?)d.DayNumber)
-            .MaxAsync() ?? 0;
-
-        nextDayNumber++;
-
-        TimeSpan newStartTime = StartTimePicker.Time;
-        TimeSpan newEndTime = EndTimePicker.Time;
-        double newTotalHours = (newEndTime - newStartTime).TotalHours;
-
-        if (newTotalHours < 0)
-            newTotalHours = 0;
-
-        var newLog = new DailyLog
+        finally
         {
-            InternshipId = _selectedInternship.Id,
-            DayNumber = nextDayNumber,
-            Date = DateTime.Today,
-            StartTime = newStartTime,
-            EndTime = newEndTime,
-            TotalHours = newTotalHours,
-            Description = DescriptionTextBox.Text,
-            Activities = TasksTextBox.Text,
-            Learned = LearningTextBox.Text,
-            Notes = NotesTextBox.Text,
-            CreatedAt = DateTime.UtcNow
-        };
-
-        db.DailyLogs.Add(newLog);
-
-        await db.SaveChangesAsync();
-
-        ClearForm();
-
-        SaveLogButton.Content = "Save daily log";
-
-        DayNumberText.Text = await GetNextDayText(_selectedInternship);
-        DateText.Text = DateTime.Today.ToString("MMMM dd, yyyy");
-
-        await LoadDailyLogs();
+            if (_selectedInternship != null)
+                SaveLogButton.IsEnabled = true;
+        }
     }
 
     // ============================================================
