@@ -1,16 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <Page
     x:Class="InternLog.Pages.ProfilePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Grid Background="#F5F6F8">
+    <Grid Background="{ThemeResource AppBackgroundBrush}">
 
-        <TextBlock
-            Text="Profile"
-            FontSize="32"
-            FontWeight="Bold"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"/>
+        <ScrollViewer
+            VerticalScrollBarVisibility="Auto"
+            HorizontalScrollBarVisibility="Disabled">
+
+            <StackPanel
+                Margin="48,40"
+                Spacing="24"
+                MaxWidth="1150"
+                HorizontalAlignment="Center">
+
+                <StackPanel Spacing="6">
+
+                    <TextBlock
+                        x:Name="ProfileTitleText"
+                        FontSize="32"
+                        FontWeight="Bold"
+                        Foreground="{ThemeResource PrimaryTextBrush}"/>
+
+                    <TextBlock
+                        x:Name="ProfileDescriptionText"
+                        FontSize="16"
+                        Foreground="{ThemeResource SecondaryTextBrush}"/>
+
+                </StackPanel>
+
+                <Border
+                    Background="{ThemeResource CardBackgroundBrush}"
+                    CornerRadius="12"
+                    Padding="28">
+
+                    <StackPanel Spacing="24">
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border
+                                Width="110"
+                                Height="110"
+                                CornerRadius="55"
+                                Background="#E8F0FE"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center">
+
+                                <Grid>
+
+                                    <Image
+                                        x:Name="AvatarImage"
+                                        Stretch="UniformToFill"
+                                        Visibility="Collapsed"/>
+
+                                    <TextBlock
+                                        x:Name="AvatarInitialsText"
+                                        Text="?"
+                                        FontSize="36"
+                                        FontWeight="Bold"
+                                        Foreground="#2563EB"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"/>
+
+                                </Grid>
+
+                            </Border>
+
+                            <StackPanel
+                                Grid.Column="1"
+                                Margin="24,0,0,0"
+                                VerticalAlignment="Center"
+                                Spacing="8">
+
+                                <TextBlock
+                                    x:Name="ProfileNameText"
+                                    Text="User"
+                                    FontSize="24"
+                                    FontWeight="SemiBold"
+                                    Foreground="{ThemeResource PrimaryTextBrush}"/>
+
+                                <TextBlock
+                                    x:Name="ProfileEmailText"
+                                    Text="email@example.com"
+                                    FontSize="14"
+                                    Foreground="{ThemeResource SecondaryTextBrush}"/>
+
+                                <Button
+                                    x:Name="ChangeAvatarButton"
+                                    Click="ChangeAvatarButton_Click"
+                                    HorizontalAlignment="Left"/>
+
+                            </StackPanel>
+
+                        </Grid>
+
+                        <StackPanel Spacing="6">
+
+                            <TextBlock
+                                x:Name="FirstNameLabelText"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                Foreground="{ThemeResource PrimaryTextBrush}"/>
+
+                            <TextBox
+                                x:Name="FirstNameTextBox"
+                                Background="{ThemeResource InputBackgroundBrush}"
+                                Foreground="{ThemeResource InputTextBrush}"/>
+
+                        </StackPanel>
+
+                        <StackPanel Spacing="6">
+
+                            <TextBlock
+                                x:Name="LastNameLabelText"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                Foreground="{ThemeResource PrimaryTextBrush}"/>
+
+                            <TextBox
+                                x:Name="LastNameTextBox"
+                                Background="{ThemeResource InputBackgroundBrush}"
+                                Foreground="{ThemeResource InputTextBrush}"/>
+
+                        </StackPanel>
+
+                        <StackPanel Spacing="6">
+
+                            <TextBlock
+                                x:Name="EmailLabelText"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                Foreground="{ThemeResource PrimaryTextBrush}"/>
+
+                            <TextBox
+                                x:Name="EmailTextBox"
+                                Background="{ThemeResource InputBackgroundBrush}"
+                                Foreground="{ThemeResource InputTextBrush}"/>
+
+                        </StackPanel>
+
+                        <StackPanel Spacing="6">
+
+                            <TextBlock
+                                x:Name="AboutMeLabelText"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                Foreground="{ThemeResource PrimaryTextBrush}"/>
+
+                            <TextBox
+                                x:Name="BioTextBox"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                MinHeight="120"
+                                Background="{ThemeResource InputBackgroundBrush}"
+                                Foreground="{ThemeResource InputTextBrush}"/>
+
+                        </StackPanel>
+
+                        <StackPanel Spacing="6">
+
+                            <TextBlock
+                                x:Name="SkillsLabelText"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                Foreground="{ThemeResource PrimaryTextBrush}"/>
+
+                            <TextBox
+                                x:Name="TagsTextBox"
+                                Background="{ThemeResource InputBackgroundBrush}"
+                                Foreground="{ThemeResource InputTextBrush}"/>
+
+                            <TextBlock
+                                x:Name="TagsDescriptionText"
+                                FontSize="13"
+                                Foreground="{ThemeResource SecondaryTextBrush}"/>
+
+                        </StackPanel>
+
+                        <Border
+                            Background="{ThemeResource AppBackgroundBrush}"
+                            CornerRadius="8"
+                            Padding="16">
+
+                            <StackPanel Spacing="4">
+
+                                <TextBlock
+                                    x:Name="AccountInformationTitleText"
+                                    FontSize="15"
+                                    FontWeight="SemiBold"
+                                    Foreground="{ThemeResource PrimaryTextBrush}"/>
+
+                                <TextBlock
+                                    x:Name="CreatedAtText"
+                                    FontSize="14"
+                                    Foreground="{ThemeResource SecondaryTextBrush}"/>
+
+                            </StackPanel>
+
+                        </Border>
+
+                        <StackPanel
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Spacing="12">
+
+                            <Button
+                                x:Name="SaveButton"
+                                Click="SaveButton_Click"/>
+
+                        </StackPanel>
+
+                    </StackPanel>
+
+                </Border>
+
+            </StackPanel>
+
+        </ScrollViewer>
 
     </Grid>
 

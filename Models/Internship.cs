@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using InternLog.Services;
+
 namespace InternLog.Models;
 
 public class Internship
@@ -29,6 +31,10 @@ public class Internship
 
     // Status dnevnika
     public string JournalStatus { get; set; } = "NotStarted";
+
+    public string DisplayStatus => LocalizationService.GetStatus(Status);
+
+    public string DisplayJournalStatus => LocalizationService.GetStatus(JournalStatus);
 
 
     // Dnevni zapisi

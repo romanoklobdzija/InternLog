@@ -1,6 +1,7 @@
 using InternLog.Pages;
 using InternLog.Services;
 using Microsoft.UI.Xaml;
+using Windows.Storage;
 
 namespace InternLog;
 
@@ -10,7 +11,53 @@ public sealed partial class MainWindow : Window
     {
         InitializeComponent();
 
+        ApplySavedAppearance();
+
+        LocalizationService.LanguageChanged += ApplyLanguage;
+
+        ApplyLanguage();
         ShowAuthentication();
+    }
+
+    private void ApplySavedAppearance()
+    {
+        string appearance =
+            ApplicationData.Current.LocalSettings.Values["Appearance"] as string
+            ?? "Light";
+
+        if (Content is FrameworkElement root)
+        {
+            root.RequestedTheme = appearance == "Dark"
+                ? ElementTheme.Dark
+                : ElementTheme.Light;
+        }
+    }
+
+    private void ApplyLanguage()
+    {
+        AppSubtitleText.Text =
+            LocalizationService.Get("InternshipTracker");
+
+        HomeButton.Content =
+            LocalizationService.Get("Home");
+
+        EmployersButton.Content =
+            LocalizationService.Get("Employers");
+
+        DailyLogButton.Content =
+            LocalizationService.Get("DailyLog");
+
+        DashboardButton.Content =
+            LocalizationService.Get("Dashboard");
+
+        ProfileButton.Content =
+            LocalizationService.Get("Profile");
+
+        SettingsButton.Content =
+            LocalizationService.Get("Settings");
+
+        LogoutButton.Content =
+            LocalizationService.Get("Logout");
     }
 
     private void ShowAuthentication()
@@ -26,6 +73,8 @@ public sealed partial class MainWindow : Window
         AuthenticationFrame.Visibility = Visibility.Collapsed;
         ApplicationView.Visibility = Visibility.Visible;
 
+        ApplyLanguage();
+
         ContentFrame.Navigate(typeof(HomePage));
     }
 
@@ -36,15 +85,12 @@ public sealed partial class MainWindow : Window
         ContentFrame.Navigate(typeof(HomePage));
     }
 
-
     private void EmployersButton_Click(
-    object sender,
-    RoutedEventArgs e)
+        object sender,
+        RoutedEventArgs e)
     {
         ContentFrame.Navigate(typeof(EmployersPage));
     }
-
-
 
     private void DashboardButton_Click(
         object sender,

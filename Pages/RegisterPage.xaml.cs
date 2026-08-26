@@ -29,8 +29,31 @@ public sealed partial class RegisterPage : Page
     public RegisterPage()
     {
         InitializeComponent();
+        Loaded += RegisterPage_Loaded;
+        LocalizationService.LanguageChanged += ApplyLanguage;
     }
 
+    private void RegisterPage_Loaded(object sender, RoutedEventArgs e)
+    {
+        ApplyLanguage();
+    }
+
+    private void ApplyLanguage()
+    {
+        RegisterTitleText.Text = LocalizationService.Get("CreateYourAccount");
+        RegisterDescriptionText.Text = LocalizationService.Get("RegisterDescription");
+        FirstNameLabelText.Text = LocalizationService.Get("FirstName");
+        FirstNameTextBox.PlaceholderText = LocalizationService.Get("EnterFirstName");
+        LastNameLabelText.Text = LocalizationService.Get("LastName");
+        LastNameTextBox.PlaceholderText = LocalizationService.Get("EnterLastName");
+        EmailLabelText.Text = LocalizationService.Get("Email");
+        EmailTextBox.PlaceholderText = LocalizationService.Get("EnterEmail");
+        PasswordLabelText.Text = LocalizationService.Get("Password");
+        PasswordBox.PlaceholderText = LocalizationService.Get("EnterPassword");
+        ConfirmPasswordLabelText.Text = LocalizationService.Get("ConfirmPassword");
+        ConfirmPasswordBox.PlaceholderText = LocalizationService.Get("ConfirmPasswordPlaceholder");
+        CreateAccountButton.Content = LocalizationService.Get("CreateAccount");
+    }
 
     private async void CreateAccountButton_Click(
     object sender,
@@ -48,14 +71,14 @@ public sealed partial class RegisterPage : Page
             string.IsNullOrWhiteSpace(email) ||
             string.IsNullOrWhiteSpace(password))
         {
-            await ShowMessage("Please fill in all fields.");
+            await ShowMessage(LocalizationService.Get("FillAllFields"));
             return;
         }
 
         // Provjera lozinki
         if (password != confirmPassword)
         {
-            await ShowMessage("Passwords do not match.");
+            await ShowMessage(LocalizationService.Get("PasswordsDoNotMatch"));
             return;
         }
 
@@ -71,13 +94,13 @@ public sealed partial class RegisterPage : Page
         if (!success)
         {
             await ShowMessage(
-                "An account with this email already exists.");
+                LocalizationService.Get("AccountAlreadyExists"));
 
             return;
         }
 
         await ShowMessage(
-            "Your account has been successfully created!");
+            LocalizationService.Get("AccountCreatedSuccessfully"));
         Frame.Navigate(typeof(LoginPage));
     }
 
@@ -88,7 +111,7 @@ public sealed partial class RegisterPage : Page
         {
             Title = "InternLog",
             Content = message,
-            CloseButtonText = "OK",
+            CloseButtonText = LocalizationService.Get("OK"),
             XamlRoot = this.Content.XamlRoot
         };
 

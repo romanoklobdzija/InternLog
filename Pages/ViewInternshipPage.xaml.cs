@@ -1,10 +1,10 @@
 using InternLog.Data;
+using InternLog.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace InternLog.Pages;
@@ -17,12 +17,15 @@ public sealed partial class ViewInternshipPage : Page
     public ViewInternshipPage()
     {
         InitializeComponent();
+        LocalizationService.LanguageChanged += ApplyLanguage;
     }
 
     protected override async void OnNavigatedTo(
         Microsoft.UI.Xaml.Navigation.NavigationEventArgs e)
     {
         base.OnNavigatedTo(e);
+
+        ApplyLanguage();
 
         if (e.Parameter is int internshipId)
         {
@@ -31,7 +34,46 @@ public sealed partial class ViewInternshipPage : Page
         }
     }
 
-    private async System.Threading.Tasks.Task LoadInternship()
+    private void ApplyLanguage()
+    {
+        InternshipDetailsTitleText.Text =
+            LocalizationService.Get("InternshipDetails");
+
+        InternshipInformationTitleText.Text =
+            LocalizationService.Get("InternshipInformation");
+
+        EmployerLabelText.Text =
+            LocalizationService.Get("Employer");
+
+        LocationLabelText.Text =
+            LocalizationService.Get("Location");
+
+        StartDateLabelText.Text =
+            LocalizationService.Get("StartDate");
+
+        EndDateLabelText.Text =
+            LocalizationService.Get("EndDate");
+
+        InternshipStatusTitleText.Text =
+            LocalizationService.Get("InternshipStatus");
+
+        InternshipStatusDescriptionText.Text =
+            LocalizationService.Get("InternshipStatusDescription");
+
+        DailyJournalTitleText.Text =
+            LocalizationService.Get("DailyJournal");
+
+        OpenDailyLogButton.Content =
+            LocalizationService.Get("OpenDailyLog");
+
+        SubmitJournalButton.Content =
+            LocalizationService.Get("SubmitJournal");
+
+        CancelInternshipButton.Content =
+            LocalizationService.Get("CancelInternship");
+    }
+
+    private async Task LoadInternship()
     {
         using var db = new AppDbContext();
 
@@ -44,13 +86,16 @@ public sealed partial class ViewInternshipPage : Page
             return;
 
         EmployerNameText.Text =
-            _internship.Employer?.Name ?? "Unknown employer";
+            _internship.Employer?.Name ??
+            LocalizationService.Get("UnknownEmployer");
 
         EmployerText.Text =
-            _internship.Employer?.Name ?? "Unknown employer";
+            _internship.Employer?.Name ??
+            LocalizationService.Get("UnknownEmployer");
 
         LocationText.Text =
-            _internship.Employer?.Location ?? "Unknown location";
+            _internship.Employer?.Location ??
+            LocalizationService.Get("UnknownLocation");
 
         StartDateText.Text =
             _internship.StartDate.ToString("dd.MM.yyyy");
@@ -58,16 +103,15 @@ public sealed partial class ViewInternshipPage : Page
         EndDateText.Text =
             _internship.EndDate.HasValue
                 ? _internship.EndDate.Value.ToString("dd.MM.yyyy")
-                : "Not specified";
+                : LocalizationService.Get("NotSpecified");
 
-        StatusText.Text = _internship.Status;
+        StatusText.Text = _internship.DisplayStatus;
 
         JournalStatusText.Text =
-            $"Status: {_internship.JournalStatus} • {_internship.DailyLogs.Count} daily logs";
-
-        // ============================================================
-        // BUTTON STATES
-        // ============================================================
+            string.Format(
+                LocalizationService.Get("JournalStatusWithLogs"),
+                _internship.DisplayJournalStatus,
+                _internship.DailyLogs.Count);
 
         if (_internship.Status == "Cancelled")
         {
@@ -84,12 +128,14 @@ public sealed partial class ViewInternshipPage : Page
                 _internship.JournalStatus == "Approved")
             {
                 SubmitJournalButton.IsEnabled = true;
-                SubmitJournalButton.Content = "Journal Submitted";
+                SubmitJournalButton.Content =
+                    LocalizationService.Get("JournalSubmitted");
             }
             else
             {
                 SubmitJournalButton.IsEnabled = true;
-                SubmitJournalButton.Content = "Submit Journal for Review";
+                SubmitJournalButton.Content =
+                    LocalizationService.Get("SubmitJournal");
             }
         }
     }
@@ -108,8 +154,8 @@ public sealed partial class ViewInternshipPage : Page
     }
 
     private async void SubmitJournalButton_Click(
-    object sender,
-    RoutedEventArgs e)
+        object sender,
+        RoutedEventArgs e)
     {
         if (_internship == null ||
             _internship.Status == "Cancelled" ||
@@ -120,17 +166,18 @@ public sealed partial class ViewInternshipPage : Page
         if (_internship.DailyLogs.Count < 5)
         {
             await ShowMessage(
-                "You must complete at least 5 daily logs before submitting your journal for review.");
+                LocalizationService.Get("MinimumFiveLogs"));
 
             return;
         }
 
         var dialog = new ContentDialog
         {
-            Title = "Submit journal?",
-            Content = "Are you sure you want to submit your journal for review?",
-            PrimaryButtonText = "Submit",
-            CloseButtonText = "Cancel",
+            Title = LocalizationService.Get("SubmitJournalQuestion"),
+            Content = LocalizationService.Get("SubmitJournalMessage"),
+            PrimaryButtonText = LocalizationService.Get("Submit"),
+            CloseButtonText = LocalizationService.Get("Cancel"),
+            DefaultButton = ContentDialogButton.Primary,
             XamlRoot = XamlRoot
         };
 
@@ -154,7 +201,7 @@ public sealed partial class ViewInternshipPage : Page
         if (internship.DailyLogs.Count < 5)
         {
             await ShowMessage(
-                "You must complete at least 5 daily logs before submitting your journal for review.");
+                LocalizationService.Get("MinimumFiveLogs"));
 
             return;
         }
@@ -167,8 +214,8 @@ public sealed partial class ViewInternshipPage : Page
     }
 
     private async void CancelInternshipButton_Click(
-    object sender,
-    RoutedEventArgs e)
+        object sender,
+        RoutedEventArgs e)
     {
         if (_internship == null ||
             _internship.Status == "Cancelled")
@@ -176,7 +223,7 @@ public sealed partial class ViewInternshipPage : Page
 
         var keepButton = new Button
         {
-            Content = "Keep Internship",
+            Content = LocalizationService.Get("KeepInternship"),
             Background = new SolidColorBrush(
                 Microsoft.UI.Colors.DodgerBlue),
             Foreground = new SolidColorBrush(
@@ -187,7 +234,7 @@ public sealed partial class ViewInternshipPage : Page
 
         var cancelButton = new Button
         {
-            Content = "Cancel Internship",
+            Content = LocalizationService.Get("CancelInternship"),
             Background = new SolidColorBrush(
                 Microsoft.UI.Colors.Red),
             Foreground = new SolidColorBrush(
@@ -204,7 +251,7 @@ public sealed partial class ViewInternshipPage : Page
         dialogContent.Children.Add(
             new TextBlock
             {
-                Text = "Are you sure you want to cancel this internship?",
+                Text = LocalizationService.Get("CancelInternshipMessage"),
                 TextWrapping = TextWrapping.Wrap
             });
 
@@ -213,7 +260,7 @@ public sealed partial class ViewInternshipPage : Page
 
         var dialog = new ContentDialog
         {
-            Title = "Cancel internship?",
+            Title = LocalizationService.Get("CancelInternshipQuestion"),
             Content = dialogContent,
             XamlRoot = XamlRoot
         };
@@ -247,24 +294,16 @@ public sealed partial class ViewInternshipPage : Page
             internshipToCancel.Status == "Cancelled")
             return;
 
-        // Oslobodi mjesto kod poslodavca
         if (internshipToCancel.Employer != null)
-        {
             internshipToCancel.Employer.StudentCapacity++;
-        }
 
-        // Oznaèi praksu kao otkazanu
         internshipToCancel.Status = "Cancelled";
 
         await db.SaveChangesAsync();
 
-        // Vrati se na My Internships
         if (Frame.CanGoBack)
             Frame.GoBack();
     }
-
-
-
 
     private async Task ShowMessage(string message)
     {
@@ -272,7 +311,7 @@ public sealed partial class ViewInternshipPage : Page
         {
             Title = "InternLog",
             Content = message,
-            CloseButtonText = "OK",
+            CloseButtonText = LocalizationService.Get("OK"),
             XamlRoot = XamlRoot
         };
 

@@ -3,6 +3,7 @@ using InternLog.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,13 +18,32 @@ public sealed partial class HomePage : Page
     {
         InitializeComponent();
         Loaded += HomePage_Loaded;
+        LocalizationService.LanguageChanged += ApplyLanguage;
     }
 
     private async void HomePage_Loaded(
         object sender,
         RoutedEventArgs e)
     {
+        ApplyLanguage();
         await LoadInternships();
+    }
+
+    private void ApplyLanguage()
+    {
+        HomeTitleText.Text =
+            LocalizationService.Get("MyInternships");
+
+        HomeDescriptionText.Text =
+            LocalizationService.Get("ManageInternships");
+
+        EmptyStateTitleText.Text =
+            LocalizationService.Get("NoInternships");
+
+        EmptyStateDescriptionText.Text =
+            LocalizationService.Get("NoInternshipsDescription");
+
+        UpdateInternshipButtonTexts();
     }
 
     private async Task LoadInternships()
@@ -35,16 +55,87 @@ public sealed partial class HomePage : Page
 
         _internships = await db.Internships
             .Include(i => i.Employer)
-            .Where(i => i.UserId == SessionService.CurrentUser.Id)
-            .Where(i => i.Status != "Cancelled")
+            .Where(i =>
+                i.UserId == SessionService.CurrentUser.Id &&
+                i.Status != "Cancelled")
+            .OrderByDescending(i => i.StartDate)
             .ToListAsync();
 
-        InternshipsItemsControl.ItemsSource = _internships;
+        InternshipsItemsControl.ItemsSource =
+            _internships;
 
         EmptyStatePanel.Visibility =
             _internships.Count == 0
                 ? Visibility.Visible
                 : Visibility.Collapsed;
+
+        UpdateInternshipButtonTexts();
+    }
+
+    private void UpdateInternshipButtonTexts()
+    {
+        if (InternshipsItemsControl == null)
+            return;
+
+        foreach (var internship in _internships)
+        {
+            var container =
+                InternshipsItemsControl.ContainerFromItem(internship);
+
+            if (container == null)
+                continue;
+
+            var textBlock =
+                FindVisualChild<TextBlock>(
+                    container,
+                    "ViewInternshipButtonText");
+
+            if (textBlock != null)
+            {
+                textBlock.Text =
+                    LocalizationService.Get("ViewInternship");
+            }
+        }
+    }
+
+    private void ViewInternshipButtonText_Loaded(
+        object sender,
+        RoutedEventArgs e)
+    {
+        if (sender is TextBlock textBlock)
+        {
+            textBlock.Text =
+                LocalizationService.Get("ViewInternship");
+        }
+    }
+
+    private static T? FindVisualChild<T>(
+        DependencyObject parent,
+        string name)
+        where T : FrameworkElement
+    {
+        int count =
+            VisualTreeHelper.GetChildrenCount(parent);
+
+        for (int i = 0; i < count; i++)
+        {
+            var child =
+                VisualTreeHelper.GetChild(parent, i);
+
+            if (child is T element &&
+                element.Name == name)
+            {
+                return element;
+            }
+
+            var result =
+                FindVisualChild<T>(child, name);
+
+            if (result != null)
+                return result;
+        }
+
+        return null;
     }
 
     private void ViewInternshipButton_Click(

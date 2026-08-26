@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+using InternLog.Services;
+
 namespace InternLog.Models;
 
 public class Employer
@@ -25,7 +27,9 @@ public class Employer
     public string StudentTasks { get; set; } = string.Empty;
 
     public string AvailablePositionsText =>
-    $"{StudentCapacity} available internship positions";
+        string.Format(
+            LocalizationService.Get("AvailablePositionsCount"),
+            StudentCapacity);
 
     public ICollection<Internship> Internships { get; set; }
         = new List<Internship>();

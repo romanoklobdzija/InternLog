@@ -1,8 +1,11 @@
 using InternLog.Data;
 using InternLog.Models;
+using InternLog.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,15 +19,30 @@ public sealed partial class EmployersPage : Page
     public EmployersPage()
     {
         InitializeComponent();
-
         Loaded += EmployersPage_Loaded;
+        LocalizationService.LanguageChanged += ApplyLanguage;
     }
 
     private async void EmployersPage_Loaded(
         object sender,
         RoutedEventArgs e)
     {
+        ApplyLanguage();
         await LoadEmployers();
+    }
+
+    private void ApplyLanguage()
+    {
+        EmployersTitleText.Text =
+            LocalizationService.Get("Employers");
+
+        EmployersDescriptionText.Text =
+            LocalizationService.Get("EmployersDescription");
+
+        SearchTextBox.PlaceholderText =
+            LocalizationService.Get("SearchEmployers");
+
+        UpdateViewDetailsButtonTexts();
     }
 
     private async Task LoadEmployers()
@@ -36,7 +54,76 @@ public sealed partial class EmployersPage : Page
             .OrderBy(e => e.Name)
             .ToListAsync();
 
-        EmployersGridView.ItemsSource = _employers;
+        EmployersGridView.ItemsSource =
+            _employers;
+
+        UpdateViewDetailsButtonTexts();
+    }
+
+    private void UpdateViewDetailsButtonTexts()
+    {
+        if (EmployersGridView == null)
+            return;
+
+        foreach (var employer in _employers)
+        {
+            var container =
+                EmployersGridView.ContainerFromItem(employer);
+
+            if (container == null)
+                continue;
+
+            var textBlock =
+                FindVisualChild<TextBlock>(
+                    container,
+                    "ViewDetailsButtonText");
+
+            if (textBlock != null)
+            {
+                textBlock.Text =
+                    LocalizationService.Get("ViewDetails");
+            }
+        }
+    }
+
+    private void ViewDetailsButtonText_Loaded(
+        object sender,
+        RoutedEventArgs e)
+    {
+        if (sender is TextBlock textBlock)
+        {
+            textBlock.Text =
+                LocalizationService.Get("ViewDetails");
+        }
+    }
+
+    private static T? FindVisualChild<T>(
+        DependencyObject parent,
+        string name)
+        where T : FrameworkElement
+    {
+        int count =
+            VisualTreeHelper.GetChildrenCount(parent);
+
+        for (int i = 0; i < count; i++)
+        {
+            var child =
+                VisualTreeHelper.GetChild(parent, i);
+
+            if (child is T element &&
+                element.Name == name)
+            {
+                return element;
+            }
+
+            var result =
+                FindVisualChild<T>(child, name);
+
+            if (result != null)
+                return result;
+        }
+
+        return null;
     }
 
     private void Employer_ItemClick(
@@ -68,11 +155,16 @@ public sealed partial class EmployersPage : Page
         object sender,
         TextChangedEventArgs e)
     {
-        string searchText = SearchTextBox.Text.Trim();
+        string searchText =
+            SearchTextBox.Text.Trim();
 
         if (string.IsNullOrWhiteSpace(searchText))
         {
-            EmployersGridView.ItemsSource = _employers;
+            EmployersGridView.ItemsSource =
+                _employers;
+
+            UpdateViewDetailsButtonTexts();
+
             return;
         }
 
@@ -80,17 +172,18 @@ public sealed partial class EmployersPage : Page
             .Where(e =>
                 e.Name.Contains(
                     searchText,
-                    System.StringComparison.OrdinalIgnoreCase) ||
-
+                    StringComparison.OrdinalIgnoreCase) ||
                 e.Industry.Contains(
                     searchText,
-                    System.StringComparison.OrdinalIgnoreCase) ||
-
+                    StringComparison.OrdinalIgnoreCase) ||
                 e.Location.Contains(
                     searchText,
-                    System.StringComparison.OrdinalIgnoreCase))
+                    StringComparison.OrdinalIgnoreCase))
             .ToList();
 
-        EmployersGridView.ItemsSource = filteredEmployers;
+        EmployersGridView.ItemsSource =
+            filteredEmployers;
+
+        UpdateViewDetailsButtonTexts();
     }
 }

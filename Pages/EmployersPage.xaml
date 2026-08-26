@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <Page
     x:Class="InternLog.Pages.EmployersPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -8,117 +7,112 @@
     <ScrollViewer>
         <Grid
             Padding="40"
-            Background="#F5F6F8">
+            Background="{ThemeResource AppBackgroundBrush}">
 
             <StackPanel Spacing="24">
 
-                <!-- HEADER -->
                 <StackPanel Spacing="6">
 
                     <TextBlock
-                        Text="Employers"
+                        x:Name="EmployersTitleText"
                         FontSize="32"
                         FontWeight="Bold"
-                        Foreground="#111827"/>
+                        Foreground="{ThemeResource PrimaryTextBrush}"/>
 
                     <TextBlock
-                        Text="Explore employers and find an internship opportunity that suits you."
+                        x:Name="EmployersDescriptionText"
                         FontSize="15"
-                        Foreground="#6B7280"/>
+                        Foreground="{ThemeResource SecondaryTextBrush}"/>
 
                 </StackPanel>
 
-
-                <!-- SEARCH -->
                 <TextBox
                     x:Name="SearchTextBox"
-                    PlaceholderText="Search employers..."
                     Height="42"
-                    Background="White"
-                    BorderBrush="#D1D5DB"
+                    Background="{ThemeResource InputBackgroundBrush}"
+                    BorderBrush="{ThemeResource InputBorderBrush}"
                     BorderThickness="1"
+                    Foreground="{ThemeResource InputTextBrush}"
                     TextChanged="SearchTextBox_TextChanged"/>
 
-
-                <!-- EMPLOYERS GRID -->
                 <GridView
-                        x:Name="EmployersGridView"
-                        IsItemClickEnabled="True"
-                        SelectionMode="None"
-                        ItemClick="Employer_ItemClick"
-                        HorizontalAlignment="Stretch"
-                        HorizontalContentAlignment="Stretch">
+                    x:Name="EmployersGridView"
+                    IsItemClickEnabled="True"
+                    SelectionMode="None"
+                    ItemClick="Employer_ItemClick"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch">
 
                     <GridView.ItemContainerStyle>
                         <Style TargetType="GridViewItem">
-
                             <Setter Property="Padding" Value="0"/>
                             <Setter Property="Margin" Value="0,0,20,20"/>
                             <Setter Property="HorizontalContentAlignment" Value="Left"/>
                             <Setter Property="VerticalContentAlignment" Value="Top"/>
-
                             <Setter Property="Background" Value="Transparent"/>
                             <Setter Property="BorderBrush" Value="Transparent"/>
                             <Setter Property="BorderThickness" Value="0"/>
-
                             <Setter Property="FocusVisualPrimaryThickness" Value="0"/>
                             <Setter Property="FocusVisualSecondaryThickness" Value="0"/>
-
                         </Style>
                     </GridView.ItemContainerStyle>
 
-
                     <GridView.ItemsPanel>
                         <ItemsPanelTemplate>
-
-                            <ItemsWrapGrid
-                Orientation="Horizontal"/>
-
+                            <ItemsWrapGrid Orientation="Horizontal"/>
                         </ItemsPanelTemplate>
                     </GridView.ItemsPanel>
-
 
                     <GridView.ItemTemplate>
                         <DataTemplate>
 
                             <Border
-                Width="300"
-                Padding="24"
-                Background="White"
-                CornerRadius="12">
+                                Width="300"
+                                Padding="24"
+                                Background="{ThemeResource CardBackgroundBrush}"
+                                CornerRadius="12">
 
                                 <StackPanel Spacing="12">
 
                                     <TextBlock
-                        Text="{Binding Name}"
-                        FontSize="20"
-                        FontWeight="SemiBold"
-                        Foreground="#111827"
-                        TextWrapping="Wrap"/>
+                                        Text="{Binding Name}"
+                                        FontSize="20"
+                                        FontWeight="SemiBold"
+                                        Foreground="{ThemeResource PrimaryTextBrush}"
+                                        TextWrapping="Wrap"/>
 
                                     <TextBlock
-                        Text="{Binding Industry}"
-                        FontSize="14"
-                        Foreground="#6B7280"/>
+                                        Text="{Binding Industry}"
+                                        FontSize="14"
+                                        Foreground="{ThemeResource SecondaryTextBrush}"/>
 
                                     <TextBlock
-                        Text="{Binding Location}"
-                        FontSize="13"
-                        Foreground="#6B7280"/>
+                                        Text="{Binding Location}"
+                                        FontSize="13"
+                                        Foreground="{ThemeResource SecondaryTextBrush}"/>
 
                                     <TextBlock
-                        Text="{Binding AvailablePositionsText}"
-                        FontSize="13"
-                        Foreground="#374151"
-                        Margin="0,8,0,0"/>
+                                        Text="{Binding AvailablePositionsText}"
+                                        FontSize="13"
+                                        Foreground="{ThemeResource PrimaryTextBrush}"
+                                        Margin="0,8,0,0"/>
 
                                     <Button
-                        Content="View details"
-                        HorizontalAlignment="Left"
-                        Background="#2563EB"
-                        Foreground="White"
-                        BorderThickness="0"
-                        Click="ViewDetailsButton_Click"/>
+                                        HorizontalAlignment="Left"
+                                        Padding="18,9"
+                                        MinWidth="150"
+                                        Background="{ThemeResource PrimaryButtonBrush}"
+                                        BorderThickness="0"
+                                        Click="ViewDetailsButton_Click">
+
+                                        <TextBlock
+                                            x:Name="ViewDetailsButtonText"
+                                            Loaded="ViewDetailsButtonText_Loaded"
+                                            Foreground="{ThemeResource PrimaryButtonTextBrush}"
+                                            FontSize="14"
+                                            FontWeight="SemiBold"/>
+
+                                    </Button>
 
                                 </StackPanel>
 

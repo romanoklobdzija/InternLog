@@ -5,29 +5,29 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Grid Background="#F5F6F8">
+    <Grid Background="{ThemeResource AppBackgroundBrush}">
 
         <Border
             Width="450"
             Padding="40"
-            Background="White"
+            Background="{ThemeResource CardBackgroundBrush}"
             CornerRadius="16"
             HorizontalAlignment="Center"
             VerticalAlignment="Center">
 
             <StackPanel Spacing="16">
 
-                <!-- TITLE -->
+                
                 <TextBlock
-                    Text="Welcome back"
+                    x:Name="WelcomeTitleText"
                     FontSize="30"
                     FontWeight="Bold"
-                    Foreground="#111827"/>
+                    Foreground="{ThemeResource PrimaryTextBrush}"/>
 
                 <TextBlock
-                    Text="Log in to continue tracking your internship."
+                    x:Name="LoginDescriptionText"
                     FontSize="14"
-                    Foreground="#6B7280"
+                    Foreground="{ThemeResource SecondaryTextBrush}"
                     TextWrapping="Wrap"
                     Margin="0,0,0,10"/>
 
@@ -36,15 +36,15 @@
                 <StackPanel Spacing="6">
 
                     <TextBlock
-                        Text="Email"
+                        x:Name="EmailLabelText"
                         FontWeight="SemiBold"
-                        Foreground="#374151"/>
+                        Foreground="{ThemeResource PrimaryTextBrush}"/>
 
                     <TextBox
                         x:Name="EmailTextBox"
-                        PlaceholderText="Enter your email"
-                        Background="White"
-                        BorderBrush="#D1D5DB"
+                        Background="{ThemeResource InputBackgroundBrush}"
+                        Foreground="{ThemeResource InputTextBrush}"
+                        BorderBrush="{ThemeResource InputBorderBrush}"
                         BorderThickness="1"/>
 
                 </StackPanel>
@@ -54,15 +54,15 @@
                 <StackPanel Spacing="6">
 
                     <TextBlock
-                        Text="Password"
+                        x:Name="PasswordLabelText"
                         FontWeight="SemiBold"
-                        Foreground="#374151"/>
+                        Foreground="{ThemeResource PrimaryTextBrush}"/>
 
                     <PasswordBox
                         x:Name="PasswordBox"
-                        PlaceholderText="Enter your password"
-                        Background="White"
-                        BorderBrush="#D1D5DB"
+                        Background="{ThemeResource InputBackgroundBrush}"
+                        Foreground="{ThemeResource InputTextBrush}"
+                        BorderBrush="{ThemeResource InputBorderBrush}"
                         BorderThickness="1"/>
 
                 </StackPanel>
@@ -71,22 +71,21 @@
                 <!-- LOGIN BUTTON -->
                 <Button
                     x:Name="LoginButton"
-                    Content="Log in"
                     Height="45"
                     Margin="0,10,0,0"
                     HorizontalAlignment="Stretch"
-                    Background="#2563EB"
-                    Foreground="White"
+                    Background="{ThemeResource PrimaryButtonBrush}"
+                    Foreground="{ThemeResource PrimaryButtonTextBrush}"
                     BorderThickness="0"
                     Click="LoginButton_Click"/>
 
 
                 <!-- REGISTER -->
                 <Button
-                    Content="Create an account"
+                    x:Name="CreateAccountButton"
                     HorizontalAlignment="Center"
                     Background="Transparent"
-                    Foreground="#2563EB"
+                    Foreground="{ThemeResource PrimaryButtonBrush}"
                     BorderThickness="0"
                     Click="RegisterButton_Click"/>
 

@@ -5,42 +5,69 @@
     Title="InternLog">
 
     <Grid>
-
-        <!-- AUTHENTICATION AREA -->
         <Frame
             x:Name="AuthenticationFrame"
             Visibility="Visible"/>
 
-
-        <!-- MAIN APPLICATION -->
         <Grid
             x:Name="ApplicationView"
             Visibility="Collapsed"
-            Background="#F5F6F8">
+            Background="{ThemeResource AppBackgroundBrush}">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="240"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-
-            <!-- SIDEBAR -->
             <Border
                 Grid.Column="0"
-                Background="White"
-                BorderBrush="#E5E7EB"
+                Background="{ThemeResource NavigationBackgroundBrush}"
+                BorderBrush="{ThemeResource BorderBrush}"
                 BorderThickness="0,0,1,0">
 
-                <Grid>
+                <Border.Resources>
+                    <ResourceDictionary>
+                        <ResourceDictionary.ThemeDictionaries>
+                            <ResourceDictionary x:Key="Light">
+                                <SolidColorBrush
+                                    x:Key="ButtonBackgroundPointerOver"
+                                    Color="#E5E7EB"/>
+                                <SolidColorBrush
+                                    x:Key="ButtonBorderBrushPointerOver"
+                                    Color="#E5E7EB"/>
+                                <SolidColorBrush
+                                    x:Key="ButtonBackgroundPressed"
+                                    Color="#D1D5DB"/>
+                                <SolidColorBrush
+                                    x:Key="ButtonBorderBrushPressed"
+                                    Color="#D1D5DB"/>
+                            </ResourceDictionary>
 
+                            <ResourceDictionary x:Key="Dark">
+                                <SolidColorBrush
+                                    x:Key="ButtonBackgroundPointerOver"
+                                    Color="#263244"/>
+                                <SolidColorBrush
+                                    x:Key="ButtonBorderBrushPointerOver"
+                                    Color="#263244"/>
+                                <SolidColorBrush
+                                    x:Key="ButtonBackgroundPressed"
+                                    Color="#2F3D52"/>
+                                <SolidColorBrush
+                                    x:Key="ButtonBorderBrushPressed"
+                                    Color="#2F3D52"/>
+                            </ResourceDictionary>
+                        </ResourceDictionary.ThemeDictionaries>
+                    </ResourceDictionary>
+                </Border.Resources>
+
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-
-                    <!-- HEADER -->
                     <StackPanel
                         Grid.Row="0"
                         Margin="24,30,24,30">
@@ -49,131 +76,111 @@
                             Text="InternLog"
                             FontSize="26"
                             FontWeight="Bold"
-                            Foreground="#111827"/>
+                            Foreground="{ThemeResource PrimaryTextBrush}"/>
 
                         <TextBlock
-                            Text="Internship tracker"
+                            x:Name="AppSubtitleText"
                             FontSize="12"
-                            Foreground="#6B7280"
+                            Foreground="{ThemeResource SecondaryTextBrush}"
                             Margin="0,4,0,0"/>
 
                     </StackPanel>
 
-
-                    <!-- NAVIGATION -->
                     <StackPanel
                         Grid.Row="1"
                         Spacing="8"
                         Margin="12,0">
 
-                        <!-- HOME -->
                         <Button
-                            Content="Home"
+                            x:Name="HomeButton"
                             Height="44"
                             HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Left"
                             Padding="16,0"
-                            Background="#F3F4F6"
-                            Foreground="#111827"
+                            Background="{ThemeResource NavigationButtonBrush}"
+                            Foreground="{ThemeResource NavigationButtonTextBrush}"
                             BorderThickness="0"
                             Click="HomeButton_Click"/>
 
-
-                        <!-- EMPLOYERS -->
                         <Button
-                            Content="Employers"
+                            x:Name="EmployersButton"
                             Height="44"
                             HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Left"
                             Padding="16,0"
-                            Background="#F3F4F6"
-                            Foreground="#111827"
+                            Background="{ThemeResource NavigationButtonBrush}"
+                            Foreground="{ThemeResource NavigationButtonTextBrush}"
                             BorderThickness="0"
                             Click="EmployersButton_Click"/>
 
-
-                        <!-- DAILY LOG -->
                         <Button
-                            Content="Daily Log"
+                            x:Name="DailyLogButton"
                             Height="44"
                             HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Left"
                             Padding="16,0"
-                            Background="#F3F4F6"
-                            Foreground="#111827"
+                            Background="{ThemeResource NavigationButtonBrush}"
+                            Foreground="{ThemeResource NavigationButtonTextBrush}"
                             BorderThickness="0"
                             Click="DailyLogButton_Click"/>
 
-
-                        <!-- DASHBOARD -->
                         <Button
-                            Content="Dashboard"
+                            x:Name="DashboardButton"
                             Height="44"
                             HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Left"
                             Padding="16,0"
-                            Background="#F3F4F6"
-                            Foreground="#111827"
+                            Background="{ThemeResource NavigationButtonBrush}"
+                            Foreground="{ThemeResource NavigationButtonTextBrush}"
                             BorderThickness="0"
                             Click="DashboardButton_Click"/>
 
-
-                        <!-- PROFILE -->
                         <Button
-                            Content="Profile"
+                            x:Name="ProfileButton"
                             Height="44"
                             HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Left"
                             Padding="16,0"
-                            Background="#F3F4F6"
-                            Foreground="#111827"
+                            Background="{ThemeResource NavigationButtonBrush}"
+                            Foreground="{ThemeResource NavigationButtonTextBrush}"
                             BorderThickness="0"
                             Click="ProfileButton_Click"/>
 
-
-
                     </StackPanel>
 
-
-                    <!-- BOTTOM NAVIGATION -->
                     <StackPanel
-    Grid.Row="2"
-    Spacing="8"
-    Margin="12,12,12,24">
+                        Grid.Row="2"
+                        Spacing="8"
+                        Margin="12,12,12,24">
 
-                        <!-- SETTINGS -->
                         <Button
-                            Content="Settings"
+                            x:Name="SettingsButton"
                             Height="44"
                             HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Left"
                             Padding="16,0"
-                            Background="#F3F4F6"
-                            Foreground="#111827"
+                            Background="{ThemeResource NavigationButtonBrush}"
+                            Foreground="{ThemeResource NavigationButtonTextBrush}"
                             BorderThickness="0"
                             Click="SettingsButton_Click"/>
 
-                        <!-- LOGOUT -->
                         <Button
-                            Content="Log out"
+                            x:Name="LogoutButton"
                             Height="44"
                             HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Left"
                             Padding="16,0"
-                            Background="#FEE2E2"
-                            Foreground="#B91C1C"
+                            Background="{ThemeResource NavigationButtonBrush}"
+                            Foreground="{ThemeResource NavigationButtonTextBrush}"
                             BorderThickness="0"
                             Click="LogoutButton_Click"/>
 
                     </StackPanel>
 
-
                 </Grid>
 
             </Border>
 
-
-            <!-- PAGE CONTENT -->
             <Frame
                 x:Name="ContentFrame"
                 Grid.Column="1"/>

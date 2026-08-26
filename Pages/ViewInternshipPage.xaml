@@ -1,236 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <Page
     x:Class="InternLog.Pages.ViewInternshipPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
-    <Grid Background="#F5F6F8">
-
+    <Grid Background="{ThemeResource AppBackgroundBrush}">
         <ScrollViewer
             HorizontalScrollBarVisibility="Disabled"
             VerticalScrollBarVisibility="Auto">
-
             <StackPanel
                 Margin="40"
                 Spacing="24">
-
-                <!-- HEADER -->
-
                 <StackPanel Spacing="6">
-
                     <TextBlock
-                        Text="Internship Details"
+                        x:Name="InternshipDetailsTitleText"
                         FontSize="32"
                         FontWeight="Bold"
-                        Foreground="#111827"/>
-
+                        Foreground="{ThemeResource PrimaryTextBrush}"/>
                     <TextBlock
                         x:Name="EmployerNameText"
                         FontSize="18"
-                        Foreground="#6B7280"/>
-
+                        Foreground="{ThemeResource SecondaryTextBrush}"/>
                 </StackPanel>
-
-
-                <!-- INTERNSHIP INFORMATION -->
-
                 <Border
-                    Background="White"
+                    Background="{ThemeResource CardBackgroundBrush}"
                     CornerRadius="12"
                     Padding="24">
-
                     <StackPanel Spacing="20">
-
                         <TextBlock
-                            Text="Internship Information"
+                            x:Name="InternshipInformationTitleText"
                             FontSize="21"
                             FontWeight="SemiBold"
-                            Foreground="#111827"/>
-
-
+                            Foreground="{ThemeResource PrimaryTextBrush}"/>
                         <Grid>
-
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="180"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-
-
                             <TextBlock
-                                Text="Employer"
+                                x:Name="EmployerLabelText"
                                 FontWeight="SemiBold"
-                                Foreground="#6B7280"/>
-
+                                Foreground="{ThemeResource SecondaryTextBrush}"/>
                             <TextBlock
                                 x:Name="EmployerText"
                                 Grid.Column="1"
-                                Foreground="#111827"/>
-
-
+                                Foreground="{ThemeResource PrimaryTextBrush}"/>
                             <TextBlock
-                                Text="Location"
+                                x:Name="LocationLabelText"
                                 Grid.Row="1"
                                 FontWeight="SemiBold"
-                                Foreground="#6B7280"/>
-
+                                Foreground="{ThemeResource SecondaryTextBrush}"/>
                             <TextBlock
                                 x:Name="LocationText"
                                 Grid.Row="1"
                                 Grid.Column="1"
-                                Foreground="#111827"/>
-
-
+                                Foreground="{ThemeResource PrimaryTextBrush}"/>
                             <TextBlock
-                                Text="Start date"
+                                x:Name="StartDateLabelText"
                                 Grid.Row="2"
                                 FontWeight="SemiBold"
-                                Foreground="#6B7280"/>
-
+                                Foreground="{ThemeResource SecondaryTextBrush}"/>
                             <TextBlock
                                 x:Name="StartDateText"
                                 Grid.Row="2"
                                 Grid.Column="1"
-                                Foreground="#111827"/>
-
-
+                                Foreground="{ThemeResource PrimaryTextBrush}"/>
                             <TextBlock
-                                Text="End date"
+                                x:Name="EndDateLabelText"
                                 Grid.Row="3"
                                 FontWeight="SemiBold"
-                                Foreground="#6B7280"/>
-
+                                Foreground="{ThemeResource SecondaryTextBrush}"/>
                             <TextBlock
                                 x:Name="EndDateText"
                                 Grid.Row="3"
                                 Grid.Column="1"
-                                Foreground="#111827"/>
-
+                                Foreground="{ThemeResource PrimaryTextBrush}"/>
                         </Grid>
-
                     </StackPanel>
-
                 </Border>
-
-
-                <!-- STATUS -->
-
                 <Border
-                    Background="White"
+                    Background="{ThemeResource CardBackgroundBrush}"
                     CornerRadius="12"
                     Padding="24">
-
                     <Grid>
-
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-
                         <StackPanel Spacing="5">
-
                             <TextBlock
-                                Text="Internship Status"
+                                x:Name="InternshipStatusTitleText"
                                 FontSize="20"
                                 FontWeight="SemiBold"
-                                Foreground="#111827"/>
-
+                                Foreground="{ThemeResource PrimaryTextBrush}"/>
                             <TextBlock
-                                Text="Current status of your internship."
+                                x:Name="InternshipStatusDescriptionText"
                                 FontSize="14"
-                                Foreground="#6B7280"/>
-
+                                Foreground="{ThemeResource SecondaryTextBrush}"/>
                         </StackPanel>
-
                         <Border
                             Grid.Column="1"
                             Background="#E8F0FE"
                             CornerRadius="8"
                             Padding="14,7"
                             VerticalAlignment="Center">
-
                             <TextBlock
                                 x:Name="StatusText"
                                 Foreground="#2563EB"
                                 FontWeight="SemiBold"/>
-
                         </Border>
-
                     </Grid>
-
                 </Border>
-
-
-                <!-- DAILY LOG -->
-
                 <Border
-                    Background="White"
+                    Background="{ThemeResource CardBackgroundBrush}"
                     CornerRadius="12"
                     Padding="24">
-
                     <Grid>
-
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-
                         <StackPanel Spacing="5">
-
                             <TextBlock
-                                Text="Daily Journal"
+                                x:Name="DailyJournalTitleText"
                                 FontSize="20"
                                 FontWeight="SemiBold"
-                                Foreground="#111827"/>
-
+                                Foreground="{ThemeResource PrimaryTextBrush}"/>
                             <TextBlock
                                 x:Name="JournalStatusText"
                                 FontSize="14"
-                                Foreground="#6B7280"/>
-
+                                Foreground="{ThemeResource SecondaryTextBrush}"/>
                         </StackPanel>
-
                         <Button
                             x:Name="OpenDailyLogButton"
                             Grid.Column="1"
-                            Content="Open Daily Log"
                             VerticalAlignment="Center"
                             Click="OpenDailyLogButton_Click"/>
-
                     </Grid>
-
                 </Border>
-
-
-                <!-- ACTIONS -->
-
                 <StackPanel
                     Orientation="Horizontal"
                     Spacing="12">
-
                     <Button
                         x:Name="SubmitJournalButton"
-                        Content="Submit Journal for Review"
                         Click="SubmitJournalButton_Click"/>
-
                     <Button
                         x:Name="CancelInternshipButton"
-                        Content="Cancel Internship"
                         Click="CancelInternshipButton_Click"/>
-
                 </StackPanel>
-
             </StackPanel>
-
         </ScrollViewer>
-
     </Grid>
-
 </Page>

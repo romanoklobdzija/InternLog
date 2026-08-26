@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <Application
     x:Class="InternLog.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -13,134 +12,327 @@
             <ResourceDictionary.MergedDictionaries>
 
                 <XamlControlsResources
-                    xmlns="using:Microsoft.UI.Xaml.Controls" />
+                    xmlns="using:Microsoft.UI.Xaml.Controls"/>
 
             </ResourceDictionary.MergedDictionaries>
 
+            <ResourceDictionary.ThemeDictionaries>
 
-            <!-- ================================================= -->
-            <!-- BUTTON - NORMAL                                  -->
-            <!-- ================================================= -->
+                <ResourceDictionary
+                    x:Key="Light">
 
-            <SolidColorBrush
-                x:Key="ButtonBackground"
-                Color="#2563EB" />
+                    <SolidColorBrush
+                        x:Key="AppBackgroundBrush"
+                        Color="#F5F6F8"/>
 
-            <SolidColorBrush
-                x:Key="ButtonForeground"
-                Color="White" />
+                    <SolidColorBrush
+                        x:Key="CardBackgroundBrush"
+                        Color="#FFFFFF"/>
 
-            <SolidColorBrush
-                x:Key="ButtonBorderBrush"
-                Color="#2563EB" />
+                    <SolidColorBrush
+                        x:Key="NavigationBackgroundBrush"
+                        Color="#FFFFFF"/>
 
+                    <SolidColorBrush
+                        x:Key="NavigationButtonBrush"
+                        Color="#F3F4F6"/>
 
-            <!-- ================================================= -->
-            <!-- BUTTON - HOVER / PRESSED                         -->
-            <!-- ================================================= -->
+                    <SolidColorBrush
+                        x:Key="NavigationButtonTextBrush"
+                        Color="#111827"/>
 
-            <SolidColorBrush
-                x:Key="ButtonBackgroundPointerOver"
-                Color="#2563EB" />
+                    <SolidColorBrush
+                        x:Key="PrimaryTextBrush"
+                        Color="#111827"/>
 
-            <SolidColorBrush
-                x:Key="ButtonForegroundPointerOver"
-                Color="White" />
+                    <SolidColorBrush
+                        x:Key="SecondaryTextBrush"
+                        Color="#6B7280"/>
 
-            <SolidColorBrush
-                x:Key="ButtonBorderBrushPointerOver"
-                Color="#2563EB" />
+                    <SolidColorBrush
+                        x:Key="BorderBrush"
+                        Color="#E5E7EB"/>
 
-            <SolidColorBrush
-                x:Key="ButtonBackgroundPressed"
-                Color="#2563EB" />
+                    <SolidColorBrush
+                        x:Key="InputBackgroundBrush"
+                        Color="#FFFFFF"/>
 
-            <SolidColorBrush
-                x:Key="ButtonForegroundPressed"
-                Color="White" />
+                    <SolidColorBrush
+                        x:Key="InputTextBrush"
+                        Color="#111827"/>
 
-            <SolidColorBrush
-                x:Key="ButtonBorderBrushPressed"
-                Color="#2563EB" />
+                    <SolidColorBrush
+                        x:Key="InputBorderBrush"
+                        Color="#D1D5DB"/>
 
+                    <SolidColorBrush
+                        x:Key="PrimaryButtonBrush"
+                        Color="#3B82F6"/>
 
-            <!-- ================================================= -->
-            <!-- TEXTBOX - GLOBAL HOVER / FOCUS                   -->
-            <!-- ================================================= -->
+                    <SolidColorBrush
+                        x:Key="PrimaryButtonTextBrush"
+                        Color="#FFFFFF"/>
 
-            <SolidColorBrush
-                x:Key="TextControlBackgroundPointerOver"
-                Color="White" />
+                    <SolidColorBrush
+                        x:Key="ButtonBackground"
+                        Color="#3B82F6"/>
 
-            <SolidColorBrush
-                x:Key="TextControlBackgroundFocused"
-                Color="White" />
+                    <SolidColorBrush
+                        x:Key="ButtonForeground"
+                        Color="#FFFFFF"/>
 
-            <SolidColorBrush
-                x:Key="TextControlForeground"
-                Color="#172033" />
+                    <SolidColorBrush
+                        x:Key="ButtonBorderBrush"
+                        Color="#3B82F6"/>
 
-            <SolidColorBrush
-                x:Key="TextControlForegroundPointerOver"
-                Color="#172033" />
+                    <SolidColorBrush
+                        x:Key="ButtonBackgroundPointerOver"
+                        Color="#2563EB"/>
 
-            <SolidColorBrush
-                x:Key="TextControlForegroundFocused"
-                Color="#172033" />
+                    <SolidColorBrush
+                        x:Key="ButtonForegroundPointerOver"
+                        Color="#FFFFFF"/>
 
-            <SolidColorBrush
-                x:Key="TextControlPlaceholderForeground"
-                Color="#6B7280" />
+                    <SolidColorBrush
+                        x:Key="ButtonBorderBrushPointerOver"
+                        Color="#2563EB"/>
 
-            <SolidColorBrush
-                x:Key="TextControlPlaceholderForegroundPointerOver"
-                Color="#6B7280" />
+                    <SolidColorBrush
+                        x:Key="ButtonBackgroundPressed"
+                        Color="#2563EB"/>
 
-            <SolidColorBrush
-                x:Key="TextControlPlaceholderForegroundFocused"
-                Color="#6B7280" />
+                    <SolidColorBrush
+                        x:Key="ButtonForegroundPressed"
+                        Color="#FFFFFF"/>
 
+                    <SolidColorBrush
+                        x:Key="ButtonBorderBrushPressed"
+                        Color="#2563EB"/>
 
-            <!-- ================================================= -->
-            <!-- COMBOBOX - GLOBAL HOVER / PRESSED                -->
-            <!-- ================================================= -->
+                    <SolidColorBrush
+                        x:Key="TextControlBackgroundPointerOver"
+                        Color="#FFFFFF"/>
 
-            <SolidColorBrush
-                x:Key="ComboBoxBackgroundPointerOver"
-                Color="White" />
+                    <SolidColorBrush
+                        x:Key="TextControlBackgroundFocused"
+                        Color="#FFFFFF"/>
 
-            <SolidColorBrush
-                x:Key="ComboBoxBackgroundPressed"
-                Color="White" />
+                    <SolidColorBrush
+                        x:Key="TextControlForeground"
+                        Color="#111827"/>
 
-            <SolidColorBrush
-                x:Key="ComboBoxForegroundPointerOver"
-                Color="#172033" />
+                    <SolidColorBrush
+                        x:Key="TextControlForegroundPointerOver"
+                        Color="#111827"/>
 
-            <SolidColorBrush
-                x:Key="ComboBoxForegroundPressed"
-                Color="#172033" />
+                    <SolidColorBrush
+                        x:Key="TextControlForegroundFocused"
+                        Color="#111827"/>
 
+                    <SolidColorBrush
+                        x:Key="TextControlPlaceholderForeground"
+                        Color="#6B7280"/>
 
-            <!-- ================================================= -->
-            <!-- TIMEPICKER / DATEPICKER                          -->
-            <!-- ================================================= -->
+                    <SolidColorBrush
+                        x:Key="TextControlPlaceholderForegroundPointerOver"
+                        Color="#6B7280"/>
 
-            <SolidColorBrush
-                x:Key="CalendarDatePickerBackgroundPointerOver"
-                Color="White" />
+                    <SolidColorBrush
+                        x:Key="TextControlPlaceholderForegroundFocused"
+                        Color="#6B7280"/>
 
-            <SolidColorBrush
-                x:Key="CalendarDatePickerBackgroundPressed"
-                Color="White" />
+                    <SolidColorBrush
+                        x:Key="ComboBoxBackgroundPointerOver"
+                        Color="#FFFFFF"/>
 
-            <SolidColorBrush
-                x:Key="TimePickerButtonBackgroundPointerOver"
-                Color="White" />
+                    <SolidColorBrush
+                        x:Key="ComboBoxBackgroundPressed"
+                        Color="#FFFFFF"/>
 
-            <SolidColorBrush
-                x:Key="TimePickerButtonBackgroundPressed"
-                Color="White" />
+                    <SolidColorBrush
+                        x:Key="ComboBoxForegroundPointerOver"
+                        Color="#111827"/>
+
+                    <SolidColorBrush
+                        x:Key="ComboBoxForegroundPressed"
+                        Color="#111827"/>
+
+                    <SolidColorBrush
+                        x:Key="CalendarDatePickerBackgroundPointerOver"
+                        Color="#FFFFFF"/>
+
+                    <SolidColorBrush
+                        x:Key="CalendarDatePickerBackgroundPressed"
+                        Color="#FFFFFF"/>
+
+                    <SolidColorBrush
+                        x:Key="TimePickerButtonBackgroundPointerOver"
+                        Color="#FFFFFF"/>
+
+                    <SolidColorBrush
+                        x:Key="TimePickerButtonBackgroundPressed"
+                        Color="#FFFFFF"/>
+
+                </ResourceDictionary>
+
+                <ResourceDictionary
+                    x:Key="Dark">
+
+                    <SolidColorBrush
+                        x:Key="AppBackgroundBrush"
+                        Color="#111827"/>
+
+                    <SolidColorBrush
+                        x:Key="CardBackgroundBrush"
+                        Color="#1F2937"/>
+
+                    <SolidColorBrush
+                        x:Key="NavigationBackgroundBrush"
+                        Color="#172033"/>
+
+                    <SolidColorBrush
+                        x:Key="NavigationButtonBrush"
+                        Color="#1F2937"/>
+
+                    <SolidColorBrush
+                        x:Key="NavigationButtonTextBrush"
+                        Color="#F9FAFB"/>
+
+                    <SolidColorBrush
+                        x:Key="PrimaryTextBrush"
+                        Color="#F9FAFB"/>
+
+                    <SolidColorBrush
+                        x:Key="SecondaryTextBrush"
+                        Color="#9CA3AF"/>
+
+                    <SolidColorBrush
+                        x:Key="BorderBrush"
+                        Color="#374151"/>
+
+                    <SolidColorBrush
+                        x:Key="InputBackgroundBrush"
+                        Color="#1F2937"/>
+
+                    <SolidColorBrush
+                        x:Key="InputTextBrush"
+                        Color="#F9FAFB"/>
+
+                    <SolidColorBrush
+                        x:Key="InputBorderBrush"
+                        Color="#4B5563"/>
+
+                    <SolidColorBrush
+                        x:Key="PrimaryButtonBrush"
+                        Color="#3B82F6"/>
+
+                    <SolidColorBrush
+                        x:Key="PrimaryButtonTextBrush"
+                        Color="#FFFFFF"/>
+
+                    <SolidColorBrush
+                        x:Key="ButtonBackground"
+                        Color="#3B82F6"/>
+
+                    <SolidColorBrush
+                        x:Key="ButtonForeground"
+                        Color="#FFFFFF"/>
+
+                    <SolidColorBrush
+                        x:Key="ButtonBorderBrush"
+                        Color="#3B82F6"/>
+
+                    <SolidColorBrush
+                        x:Key="ButtonBackgroundPointerOver"
+                        Color="#3B82F6"/>
+
+                    <SolidColorBrush
+                        x:Key="ButtonForegroundPointerOver"
+                        Color="#FFFFFF"/>
+
+                    <SolidColorBrush
+                        x:Key="ButtonBorderBrushPointerOver"
+                        Color="#3B82F6"/>
+
+                    <SolidColorBrush
+                        x:Key="ButtonBackgroundPressed"
+                        Color="#2563EB"/>
+
+                    <SolidColorBrush
+                        x:Key="ButtonForegroundPressed"
+                        Color="#FFFFFF"/>
+
+                    <SolidColorBrush
+                        x:Key="ButtonBorderBrushPressed"
+                        Color="#2563EB"/>
+
+                    <SolidColorBrush
+                        x:Key="TextControlBackgroundPointerOver"
+                        Color="#263244"/>
+
+                    <SolidColorBrush
+                        x:Key="TextControlBackgroundFocused"
+                        Color="#263244"/>
+
+                    <SolidColorBrush
+                        x:Key="TextControlForeground"
+                        Color="#F9FAFB"/>
+
+                    <SolidColorBrush
+                        x:Key="TextControlForegroundPointerOver"
+                        Color="#F9FAFB"/>
+
+                    <SolidColorBrush
+                        x:Key="TextControlForegroundFocused"
+                        Color="#F9FAFB"/>
+
+                    <SolidColorBrush
+                        x:Key="TextControlPlaceholderForeground"
+                        Color="#9CA3AF"/>
+
+                    <SolidColorBrush
+                        x:Key="TextControlPlaceholderForegroundPointerOver"
+                        Color="#9CA3AF"/>
+
+                    <SolidColorBrush
+                        x:Key="TextControlPlaceholderForegroundFocused"
+                        Color="#9CA3AF"/>
+
+                    <SolidColorBrush
+                        x:Key="ComboBoxBackgroundPointerOver"
+                        Color="#263244"/>
+
+                    <SolidColorBrush
+                        x:Key="ComboBoxBackgroundPressed"
+                        Color="#263244"/>
+
+                    <SolidColorBrush
+                        x:Key="ComboBoxForegroundPointerOver"
+                        Color="#F9FAFB"/>
+
+                    <SolidColorBrush
+                        x:Key="ComboBoxForegroundPressed"
+                        Color="#F9FAFB"/>
+
+                    <SolidColorBrush
+                        x:Key="CalendarDatePickerBackgroundPointerOver"
+                        Color="#263244"/>
+
+                    <SolidColorBrush
+                        x:Key="CalendarDatePickerBackgroundPressed"
+                        Color="#263244"/>
+
+                    <SolidColorBrush
+                        x:Key="TimePickerButtonBackgroundPointerOver"
+                        Color="#263244"/>
+
+                    <SolidColorBrush
+                        x:Key="TimePickerButtonBackgroundPressed"
+                        Color="#263244"/>
+
+                </ResourceDictionary>
+
+            </ResourceDictionary.ThemeDictionaries>
 
         </ResourceDictionary>
 

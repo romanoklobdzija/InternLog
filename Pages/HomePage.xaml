@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <Page
     x:Class="InternLog.Pages.HomePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Grid Background="#F5F6F8">
-
+    <Grid Background="{ThemeResource AppBackgroundBrush}">
         <ScrollViewer
             HorizontalScrollBarVisibility="Disabled"
             VerticalScrollBarVisibility="Auto">
@@ -15,24 +13,21 @@
                 Margin="40"
                 Spacing="24">
 
-                <!-- HEADER -->
                 <StackPanel Spacing="6">
 
                     <TextBlock
-                        Text="My Internships"
+                        x:Name="HomeTitleText"
                         FontSize="32"
                         FontWeight="Bold"
-                        Foreground="#111827"/>
+                        Foreground="{ThemeResource PrimaryTextBrush}"/>
 
                     <TextBlock
-                        Text="Manage your internships and check their current status."
+                        x:Name="HomeDescriptionText"
                         FontSize="16"
-                        Foreground="#6B7280"/>
+                        Foreground="{ThemeResource SecondaryTextBrush}"/>
 
                 </StackPanel>
 
-
-                <!-- INTERNSHIP LIST -->
                 <ItemsControl
                     x:Name="InternshipsItemsControl">
 
@@ -41,7 +36,7 @@
                         <DataTemplate>
 
                             <Border
-                                Background="White"
+                                Background="{ThemeResource CardBackgroundBrush}"
                                 CornerRadius="12"
                                 Padding="24"
                                 Margin="0,0,0,12">
@@ -53,8 +48,6 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
 
-
-                                    <!-- INTERNSHIP INFO -->
                                     <StackPanel
                                         Spacing="8">
 
@@ -62,21 +55,20 @@
                                             Text="{Binding Employer.Name}"
                                             FontSize="22"
                                             FontWeight="SemiBold"
-                                            Foreground="#111827"/>
+                                            Foreground="{ThemeResource PrimaryTextBrush}"/>
 
                                         <TextBlock
-                                                Text="{Binding StartDate}"
-                                                FontSize="14"
-                                                Foreground="#6B7280"/>
+                                            Text="{Binding StartDate}"
+                                            FontSize="14"
+                                            Foreground="{ThemeResource SecondaryTextBrush}"/>
 
                                         <TextBlock
                                             Text="{Binding EndDate}"
                                             FontSize="14"
-                                            Foreground="#6B7280"/>
+                                            Foreground="{ThemeResource SecondaryTextBrush}"/>
+
                                     </StackPanel>
 
-
-                                    <!-- STATUS -->
                                     <StackPanel
                                         Grid.Column="1"
                                         HorizontalAlignment="Right"
@@ -89,16 +81,29 @@
                                             Padding="12,6">
 
                                             <TextBlock
-                                                Text="{Binding Status}"
+                                                Text="{Binding DisplayStatus}"
                                                 Foreground="#2563EB"
                                                 FontWeight="SemiBold"/>
 
                                         </Border>
 
                                         <Button
-                                            Content="View Internship"
                                             Tag="{Binding Id}"
-                                            Click="ViewInternshipButton_Click"/>
+                                            Click="ViewInternshipButton_Click"
+                                            HorizontalAlignment="Left"
+                                            Padding="18,9"
+                                            MinWidth="150"
+                                            Background="{ThemeResource PrimaryButtonBrush}"
+                                            BorderThickness="0">
+
+                                            <TextBlock
+                                                x:Name="ViewInternshipButtonText"
+                                                Loaded="ViewInternshipButtonText_Loaded"
+                                                Foreground="{ThemeResource PrimaryButtonTextBrush}"
+                                                FontSize="14"
+                                                FontWeight="SemiBold"/>
+
+                                        </Button>
 
                                     </StackPanel>
 
@@ -112,8 +117,6 @@
 
                 </ItemsControl>
 
-
-                <!-- EMPTY STATE -->
                 <StackPanel
                     x:Name="EmptyStatePanel"
                     HorizontalAlignment="Center"
@@ -121,16 +124,16 @@
                     Visibility="Collapsed">
 
                     <TextBlock
-                        Text="No internships found"
+                        x:Name="EmptyStateTitleText"
                         FontSize="22"
                         FontWeight="SemiBold"
-                        Foreground="#111827"
+                        Foreground="{ThemeResource PrimaryTextBrush}"
                         HorizontalAlignment="Center"/>
 
                     <TextBlock
-                        Text="You currently don't have any internships."
+                        x:Name="EmptyStateDescriptionText"
                         FontSize="15"
-                        Foreground="#6B7280"
+                        Foreground="{ThemeResource SecondaryTextBrush}"
                         HorizontalAlignment="Center"/>
 
                 </StackPanel>
@@ -138,7 +141,6 @@
             </StackPanel>
 
         </ScrollViewer>
-
     </Grid>
 
 </Page>
