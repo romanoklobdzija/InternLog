@@ -1,17 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <Page
     x:Class="InternLog.Pages.DailyLogPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="{ThemeResource AppBackgroundBrush}">
 
-    <Grid Background="#F5F6F8">
+    <Page.Resources>
 
-        <TextBlock
-            Text="Diary"
-            FontSize="32"
-            FontWeight="Bold"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"/>
+        <Style
+            x:Key="DailyLogTextBoxStyle"
+            TargetType="TextBox">
 
-    </Grid>
+            <Setter
+                Property="Background"
+                Value="{ThemeResource InputBackgroundBrush}"/>
+
+            <Setter
+                Property="Foreground"
+                Value="{ThemeResource InputTextBrush}"/>
+
+            <Setter
+                Property="BorderBrush"
+                Value="{ThemeResource InputBorderBrush}"/>
+
+            <Setter
+                Property="BorderThickness"
+                Value="1"/>
+
+            <Setter
+                Property="Padding"
+                Value="12"/>
+
+        </Style>
+
+        <Style
+            x:Key="DailyLogComboBoxStyle"
+            TargetType="ComboBox">
+
+            <Setter
+                Property="Background"
+                Value="{ThemeResource InputBackgroundBrush}"/>
+
+            <Setter
+                Property="Foreground"
+                Value="{ThemeResource InputTextBrush}"/>
+
+            <Setter
+                Property="BorderBrush"
+                Value="{ThemeResource InputBorderBrush}"/>
+
+            <Setter
+                Property="BorderThickness"
+                Value="1"/>
+
+            <Setter
+                Property="Height"
+                Value="42"/>
+
+        </Style>
+
+        <Style
+            x:Key="DailyLogNumberBoxStyle"
+            TargetType="NumberBox">
+
+            <Setter
+                Property="Background"
+                Value="{ThemeResource InputBackgroundBrush}"/>
+
+            <Setter
+                Property="Foreground"
+                Value="{ThemeResource InputTextBrush}"/>
+
+            <Setter
+                Property="BorderBrush"
+                Value="{ThemeResource InputBorderBrush}"/>
+
+            <Setter
+                Property="BorderThickness"
+                Value="1"/>
+
+            <Setter
+                Property="Height"
+                Value="42"/>
+
+        </Style>
+
+        <Style
+            x:Key="DailyLogDatePickerStyle"
+            TargetType="DatePicker">
+
+            <Setter
+                Property="Background"
+                Value="{ThemeResource InputBackgroundBrush}"/>
+
+            <Setter
+                Property="Foreground"
+                Value="{ThemeResource InputTextBrush}"/>
+
+            <Setter
+                Property="BorderBrush"
+                Value="{ThemeResource InputBorderBrush}"/>
+
+            <Setter
+                Property="BorderThickness"
+                Value="1"/>
+
+            <Setter
+                Property="Height"
+                Value="42"/>
+
+        </Style>
+
+    </Page.Resources>
+
+    <ScrollViewer
+        VerticalScrollBarVisibility="Auto"
+        HorizontalScrollBarVisibility="Disabled">
+
+        <Grid
+            Padding="40">
+
+            <StackPanel
+                MaxWidth="1200"
+                HorizontalAlignment="Stretch"
+                Spacing="24">
+
+                <StackPanel
+                    Spacing="6">
+
+                    <TextBlock
+                        x:Name="DailyLogTitleText"
+                        FontSize="32"
+                        FontWeight="Bold"
+                        Foreground="{ThemeResource PrimaryTextBrush}"/>
+
+                    <TextBlock
+                        x:Name="DailyLogDescriptionText"
+                        FontSize="15"
+                        Foreground="{ThemeResource SecondaryTextBrush}"
+                        TextWrapping="Wrap"/>
+
+                </StackPanel>
+
+                <Border
+                    Background="{ThemeResource CardBackgroundBrush}"
+                    CornerRadius="12"
+                    Padding="28">
+
+                    <StackPanel
+                        Spacing="22">
+
+                        <StackPanel
+                            Spacing="7">
+
+                            <TextBlock
+                                x:Name="InternshipLabelText"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                Foreground="{ThemeResource PrimaryTextBrush}"/>
+
+                            <ComboBox
+                                x:Name="InternshipComboBox"
+                                Style="{StaticResource DailyLogComboBoxStyle}"
+                                SelectionChanged="InternshipComboBox_SelectionChanged"
+                                HorizontalAlignment="Stretch"/>
+
+                        </StackPanel>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel
+                                Grid.Column="0"
+                                Spacing="7">
+
+                                <TextBlock
+                                    x:Name="DateLabelText"
+                                    FontSize="14"
+                                    FontWeight="SemiBold"
+                                    Foreground="{ThemeResource PrimaryTextBrush}"/>
+
+                                <Border
+                                    MinHeight="42"
+                                    Background="{ThemeResource InputBackgroundBrush}"
+                                    BorderBrush="{ThemeResource InputBorderBrush}"
+                                    BorderThickness="1">
+                                    <TextBlock
+                                        x:Name="DateValueText"
+                                        Padding="12"
+                                        VerticalAlignment="Center"
+                                        Foreground="{ThemeResource InputTextBrush}" />
+                                </Border>
+
+                            </StackPanel>
+
+                            <StackPanel
+                                Grid.Column="2"
+                                Spacing="7">
+
+                                <TextBlock
+                                    x:Name="HoursLabelText"
+                                    FontSize="14"
+                                    FontWeight="SemiBold"
+                                    Foreground="{ThemeResource PrimaryTextBrush}"/>
+
+                                <NumberBox
+                                    x:Name="HoursNumberBox"
+                                    Style="{StaticResource DailyLogNumberBoxStyle}"
+                                    Minimum="0"
+                                    Maximum="24"
+                                    SmallChange="0.5"
+                                    LargeChange="1"
+                                    SpinButtonPlacementMode="Compact"
+                                    HorizontalAlignment="Stretch"/>
+
+                            </StackPanel>
+
+                        </Grid>
+
+                        <StackPanel
+                            Spacing="7">
+
+                            <TextBlock
+                                x:Name="DescriptionLabelText"
+                                FontSize="14"
+                                FontWeight="SemiBold"
+                                Foreground="{ThemeResource PrimaryTextBrush}"/>
+
+                            <TextBox
+                                x:Name="DescriptionTextBox"
+                                Style="{StaticResource DailyLogTextBoxStyle}"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                MinHeight="150"
+                                PlaceholderText="Describe what you worked on today..."
+                                VerticalContentAlignment="Top"/>
+
+                        </StackPanel>
+
+                        <Button
+                            x:Name="SaveLogButton"
+                            HorizontalAlignment="Right"
+                            Padding="22,10"
+                            Background="{ThemeResource PrimaryButtonBrush}"
+                            Foreground="{ThemeResource PrimaryButtonTextBrush}"
+                            BorderThickness="0"
+                            Click="SaveLogButton_Click"/>
+
+                    </StackPanel>
+
+                </Border>
+
+                <Border
+                    Background="{ThemeResource CardBackgroundBrush}"
+                    CornerRadius="12"
+                    Padding="28">
+
+                    <StackPanel
+                        Spacing="18">
+
+                        <TextBlock
+                            x:Name="ExistingLogsTitleText"
+                            FontSize="21"
+                            FontWeight="SemiBold"
+                            Foreground="{ThemeResource PrimaryTextBrush}"/>
+
+                        <ItemsControl
+                            x:Name="DailyLogsItemsControl">
+
+                            <ItemsControl.ItemTemplate>
+
+                                <DataTemplate>
+
+                                    <Border
+                                        Background="{ThemeResource InputBackgroundBrush}"
+                                        BorderBrush="{ThemeResource BorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="10"
+                                        Padding="18"
+                                        Margin="0,0,0,10">
+
+                                        <StackPanel Spacing="7">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock
+                                                    Text="{Binding Day}"
+                                                    FontSize="15"
+                                                    FontWeight="SemiBold"
+                                                    Foreground="{ThemeResource PrimaryTextBrush}"/>
+                                                <Button
+                                                    Grid.Column="1"
+                                                    Tag="{Binding Id}"
+                                                    Click="EditLogButton_Click"
+                                                    Loaded="EditLogButton_Loaded" />
+                                            </Grid>
+
+                                            <TextBlock
+                                                Text="{Binding Hours}"
+                                                FontSize="13"
+                                                Foreground="{ThemeResource SecondaryTextBrush}"/>
+
+                                            <TextBlock
+                                                Text="{Binding Description}"
+                                                FontSize="14"
+                                                Foreground="{ThemeResource PrimaryTextBrush}"
+                                                TextWrapping="Wrap"/>
+
+                                        </StackPanel>
+
+                                    </Border>
+
+                                </DataTemplate>
+
+                            </ItemsControl.ItemTemplate>
+
+                        </ItemsControl>
+
+                    </StackPanel>
+
+                </Border>
+
+            </StackPanel>
+
+        </Grid>
+
+    </ScrollViewer>
 
 </Page>

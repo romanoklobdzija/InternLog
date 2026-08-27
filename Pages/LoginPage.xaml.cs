@@ -22,16 +22,32 @@ using InternLog;
 
 namespace InternLog.Pages;
 
-/// <summary>
-/// An empty page that can be used on its own or navigated to within a Frame.
-/// </summary>
+
 public sealed partial class LoginPage : Page
 {
     public LoginPage()
     {
         InitializeComponent();
+        Loaded += LoginPage_Loaded;
+        LocalizationService.LanguageChanged += ApplyLanguage;
     }
 
+    private void LoginPage_Loaded(object sender, RoutedEventArgs e)
+    {
+        ApplyLanguage();
+    }
+
+    private void ApplyLanguage()
+    {
+        WelcomeTitleText.Text = LocalizationService.Get("WelcomeBackLogin");
+        LoginDescriptionText.Text = LocalizationService.Get("LoginDescription");
+        EmailLabelText.Text = LocalizationService.Get("Email");
+        EmailTextBox.PlaceholderText = LocalizationService.Get("EnterEmail");
+        PasswordLabelText.Text = LocalizationService.Get("Password");
+        PasswordBox.PlaceholderText = LocalizationService.Get("EnterPassword");
+        LoginButton.Content = LocalizationService.Get("LogIn");
+        CreateAccountButton.Content = LocalizationService.Get("CreateAccount");
+    }
 
     private async void LoginButton_Click(
     object sender,
@@ -43,7 +59,7 @@ public sealed partial class LoginPage : Page
         if (string.IsNullOrWhiteSpace(email) ||
             string.IsNullOrWhiteSpace(password))
         {
-            await ShowMessage("Please enter your email and password.");
+            await ShowMessage(LocalizationService.Get("EnterEmailAndPassword"));
             return;
         }
 
@@ -53,7 +69,7 @@ public sealed partial class LoginPage : Page
 
         if (user == null)
         {
-            await ShowMessage("Incorrect email or password.");
+            await ShowMessage(LocalizationService.Get("InvalidCredentials"));
             return;
         }
 
@@ -85,7 +101,7 @@ public sealed partial class LoginPage : Page
         {
             Title = "InternLog",
             Content = message,
-            CloseButtonText = "OK",
+            CloseButtonText = LocalizationService.Get("OK"),
             XamlRoot = this.Content.XamlRoot
         };
 
