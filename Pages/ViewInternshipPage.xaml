@@ -10,6 +10,16 @@
             <StackPanel
                 Margin="40"
                 Spacing="24">
+                <Button
+                    x:Name="BackButton"
+                    Click="BackButton_Click"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    Foreground="{ThemeResource SecondaryTextBrush}"
+                    BorderThickness="0"
+                    FontSize="14">
+                    <TextBlock x:Name="BackButtonText" />
+                </Button>
                 <StackPanel Spacing="6">
                     <TextBlock
                         x:Name="InternshipDetailsTitleText"
@@ -105,13 +115,13 @@
                         </StackPanel>
                         <Border
                             Grid.Column="1"
-                            Background="#E8F0FE"
+                            Background="#F1E8FF"
                             CornerRadius="8"
                             Padding="14,7"
                             VerticalAlignment="Center">
                             <TextBlock
                                 x:Name="StatusText"
-                                Foreground="#2563EB"
+                                Foreground="#7C3AED"
                                 FontWeight="SemiBold"/>
                         </Border>
                     </Grid>

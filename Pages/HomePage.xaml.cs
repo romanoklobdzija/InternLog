@@ -57,7 +57,7 @@ public sealed partial class HomePage : Page
             .Include(i => i.Employer)
             .Where(i =>
                 i.UserId == SessionService.CurrentUser.Id &&
-                i.Status != "Cancelled")
+                i.Status == "Approved")
             .OrderByDescending(i => i.StartDate)
             .ToListAsync();
 
@@ -85,26 +85,26 @@ public sealed partial class HomePage : Page
             if (container == null)
                 continue;
 
-            var textBlock =
-                FindVisualChild<TextBlock>(
+            var button =
+                FindVisualChild<Button>(
                     container,
-                    "ViewInternshipButtonText");
+                    string.Empty);
 
-            if (textBlock != null)
+            if (button != null)
             {
-                textBlock.Text =
+                button.Content =
                     LocalizationService.Get("ViewInternship");
             }
         }
     }
 
-    private void ViewInternshipButtonText_Loaded(
+    private void ViewInternshipButton_Loaded(
         object sender,
         RoutedEventArgs e)
     {
-        if (sender is TextBlock textBlock)
+        if (sender is Button button)
         {
-            textBlock.Text =
+            button.Content =
                 LocalizationService.Get("ViewInternship");
         }
     }

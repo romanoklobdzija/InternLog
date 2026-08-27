@@ -77,6 +77,9 @@ public sealed partial class SettingsPage : Page
         NotificationsToggle.Header =
             LocalizationService.Get("EnableNotifications");
 
+        TestNotificationButton.Content =
+            LocalizationService.Get("SendTestNotification");
+
         LanguageTitleText.Text =
             LocalizationService.Get("Language");
 
@@ -125,7 +128,7 @@ public sealed partial class SettingsPage : Page
         ShowSavedMessage();
     }
 
-    private void NotificationsToggle_Toggled(
+    private async void NotificationsToggle_Toggled(
         object sender,
         RoutedEventArgs e)
     {
@@ -135,7 +138,17 @@ public sealed partial class SettingsPage : Page
         _settings.Values["Notifications"] =
             NotificationsToggle.IsOn;
 
+        if (NotificationsToggle.IsOn)
+            await InternshipNotificationService.RefreshForCurrentUserAsync();
+        else
+            InternshipNotificationService.ClearScheduledNotifications();
+
         ShowSavedMessage();
+    }
+
+    private void TestNotificationButton_Click(object sender, RoutedEventArgs e)
+    {
+        InternshipNotificationService.ShowTestNotification();
     }
 
     private void LanguageComboBox_SelectionChanged(

@@ -1,15 +1,26 @@
 using InternLog.Pages;
 using InternLog.Services;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Dispatching;
+using System;
 using Windows.Storage;
 
 namespace InternLog;
 
 public sealed partial class MainWindow : Window
 {
+    private readonly DispatcherTimer _internshipLifecycleTimer;
+
     public MainWindow()
     {
         InitializeComponent();
+
+        _internshipLifecycleTimer = new DispatcherTimer
+        {
+            Interval = TimeSpan.FromMinutes(30)
+        };
+        _internshipLifecycleTimer.Tick += async (_, _) =>
+            await InternshipNotificationService.RefreshForCurrentUserAsync();
 
         ApplySavedAppearance();
 
@@ -76,6 +87,8 @@ public sealed partial class MainWindow : Window
         ApplyLanguage();
 
         ContentFrame.Navigate(typeof(HomePage));
+        _ = InternshipNotificationService.RefreshForCurrentUserAsync();
+        _internshipLifecycleTimer.Start();
     }
 
     private void HomeButton_Click(
@@ -120,11 +133,25 @@ public sealed partial class MainWindow : Window
         ContentFrame.Navigate(typeof(SettingsPage));
     }
 
-    private void LogoutButton_Click(
+    private async void LogoutButton_Click(
         object sender,
         RoutedEventArgs e)
     {
+        var dialog = new Microsoft.UI.Xaml.Controls.ContentDialog
+        {
+            Title = LocalizationService.Get("LogoutConfirmationTitle"),
+            Content = LocalizationService.Get("LogoutConfirmationMessage"),
+            PrimaryButtonText = LocalizationService.Get("Logout"),
+            CloseButtonText = LocalizationService.Get("Cancel"),
+            DefaultButton = Microsoft.UI.Xaml.Controls.ContentDialogButton.Close,
+            XamlRoot = Content.XamlRoot
+        };
+
+        if (await dialog.ShowAsync() != Microsoft.UI.Xaml.Controls.ContentDialogResult.Primary)
+            return;
+
         SessionService.Logout();
+        _internshipLifecycleTimer.Stop();
 
         ShowAuthentication();
     }

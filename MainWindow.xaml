@@ -31,31 +31,43 @@
                             <ResourceDictionary x:Key="Light">
                                 <SolidColorBrush
                                     x:Key="ButtonBackgroundPointerOver"
-                                    Color="#E5E7EB"/>
+                                    Color="#EEE7F7"/>
                                 <SolidColorBrush
                                     x:Key="ButtonBorderBrushPointerOver"
-                                    Color="#E5E7EB"/>
+                                    Color="#D8C9EA"/>
+                                <SolidColorBrush
+                                    x:Key="ButtonForegroundPointerOver"
+                                    Color="#241B32"/>
                                 <SolidColorBrush
                                     x:Key="ButtonBackgroundPressed"
-                                    Color="#D1D5DB"/>
+                                    Color="#DDD1EE"/>
                                 <SolidColorBrush
                                     x:Key="ButtonBorderBrushPressed"
-                                    Color="#D1D5DB"/>
+                                    Color="#C3AEDC"/>
+                                <SolidColorBrush
+                                    x:Key="ButtonForegroundPressed"
+                                    Color="#241B32"/>
                             </ResourceDictionary>
 
                             <ResourceDictionary x:Key="Dark">
                                 <SolidColorBrush
                                     x:Key="ButtonBackgroundPointerOver"
-                                    Color="#263244"/>
+                                    Color="#E7DDF1"/>
                                 <SolidColorBrush
                                     x:Key="ButtonBorderBrushPointerOver"
-                                    Color="#263244"/>
+                                    Color="#D5C4E5"/>
+                                <SolidColorBrush
+                                    x:Key="ButtonForegroundPointerOver"
+                                    Color="#241B32"/>
                                 <SolidColorBrush
                                     x:Key="ButtonBackgroundPressed"
-                                    Color="#2F3D52"/>
+                                    Color="#D4C4E4"/>
                                 <SolidColorBrush
                                     x:Key="ButtonBorderBrushPressed"
-                                    Color="#2F3D52"/>
+                                    Color="#C1ABD9"/>
+                                <SolidColorBrush
+                                    x:Key="ButtonForegroundPressed"
+                                    Color="#241B32"/>
                             </ResourceDictionary>
                         </ResourceDictionary.ThemeDictionaries>
                     </ResourceDictionary>
@@ -76,12 +88,12 @@
                             Text="InternLog"
                             FontSize="26"
                             FontWeight="Bold"
-                            Foreground="{ThemeResource PrimaryTextBrush}"/>
+                            Foreground="{ThemeResource NavigationButtonTextBrush}"/>
 
                         <TextBlock
                             x:Name="AppSubtitleText"
                             FontSize="12"
-                            Foreground="{ThemeResource SecondaryTextBrush}"
+                            Foreground="{ThemeResource NavigationButtonTextBrush}"
                             Margin="0,4,0,0"/>
 
                     </StackPanel>

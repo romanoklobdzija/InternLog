@@ -90,6 +90,11 @@
                             x:Name="NotificationsToggle"
                             Toggled="NotificationsToggle_Toggled"
                             Foreground="{ThemeResource PrimaryTextBrush}"/>
+
+                        <Button
+                            x:Name="TestNotificationButton"
+                            HorizontalAlignment="Left"
+                            Click="TestNotificationButton_Click" />
                     </StackPanel>
                 </Border>
 
@@ -166,7 +171,7 @@
                 <TextBlock
                     x:Name="SettingsSavedText"
                     FontSize="14"
-                    Foreground="#16A34A"
+                    Foreground="#378A64"
                     HorizontalAlignment="Right"
                     Visibility="Collapsed"/>
 

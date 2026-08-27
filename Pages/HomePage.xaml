@@ -76,13 +76,13 @@
                                         Spacing="12">
 
                                         <Border
-                                            Background="#E8F0FE"
+                                            Background="#F1E8FF"
                                             CornerRadius="8"
                                             Padding="12,6">
 
                                             <TextBlock
                                                 Text="{Binding DisplayStatus}"
-                                                Foreground="#2563EB"
+                                                Foreground="#7C3AED"
                                                 FontWeight="SemiBold"/>
 
                                         </Border>
@@ -90,18 +90,12 @@
                                         <Button
                                             Tag="{Binding Id}"
                                             Click="ViewInternshipButton_Click"
+                                            Loaded="ViewInternshipButton_Loaded"
                                             HorizontalAlignment="Left"
                                             Padding="18,9"
                                             MinWidth="150"
                                             Background="{ThemeResource PrimaryButtonBrush}"
                                             BorderThickness="0">
-
-                                            <TextBlock
-                                                x:Name="ViewInternshipButtonText"
-                                                Loaded="ViewInternshipButtonText_Loaded"
-                                                Foreground="{ThemeResource PrimaryButtonTextBrush}"
-                                                FontSize="14"
-                                                FontWeight="SemiBold"/>
 
                                         </Button>
 

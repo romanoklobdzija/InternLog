@@ -22,7 +22,7 @@
                     <TextBlock x:Name="BackButtonText"/>
                 </Button>
                 <Border
-                    Background="#111827"
+                    Background="#2A2236"
                     CornerRadius="18"
                     Padding="36">
                     <Grid>
@@ -58,13 +58,13 @@
                                     <TextBlock
                                         x:Name="IndustryText"
                                         FontSize="14"
-                                        Foreground="#CBD5E1"/>
+                                        Foreground="#E0D5E8"/>
                                 </StackPanel>
                             </StackPanel>
                             <TextBlock
                                 x:Name="LocationText"
                                 FontSize="14"
-                                Foreground="#CBD5E1"
+                                Foreground="#E0D5E8"
                                 Margin="68,0,0,0"/>
                         </StackPanel>
                         <StackPanel
@@ -72,7 +72,7 @@
                             Spacing="12"
                             HorizontalAlignment="Right">
                             <Border
-                                Background="#DCFCE7"
+                                Background="#E4F4E5"
                                 CornerRadius="20"
                                 Padding="14,8"
                                 HorizontalAlignment="Right">
@@ -82,11 +82,11 @@
                                     <Ellipse
                                         Width="9"
                                         Height="9"
-                                        Fill="#16A34A"
+                                        Fill="#378A64"
                                         VerticalAlignment="Center"/>
                                     <TextBlock
                                         x:Name="InternshipOpenText"
-                                        Foreground="#166534"
+                                        Foreground="#1F684A"
                                         FontWeight="SemiBold"
                                         FontSize="13"/>
                                 </StackPanel>
@@ -265,7 +265,7 @@
                             <TextBlock
                                 x:Name="WebsiteText"
                                 FontSize="14"
-                                Foreground="#3B82F6"/>
+                                Foreground="#7C3AED"/>
                         </StackPanel>
                     </Border>
                     <Border
@@ -291,10 +291,10 @@
                                     Width="30"
                                     Height="30"
                                     CornerRadius="15"
-                                    Background="#DBEAFE">
+                                    Background="#F1E8FF">
                                     <TextBlock
                                         Text="✓"
-                                        Foreground="#2563EB"
+                                        Foreground="#7C3AED"
                                         FontWeight="Bold"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"/>
@@ -312,10 +312,10 @@
                                     Width="30"
                                     Height="30"
                                     CornerRadius="15"
-                                    Background="#DBEAFE">
+                                    Background="#F1E8FF">
                                     <TextBlock
                                         Text="✓"
-                                        Foreground="#2563EB"
+                                        Foreground="#7C3AED"
                                         FontWeight="Bold"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"/>
@@ -333,10 +333,10 @@
                                     Width="30"
                                     Height="30"
                                     CornerRadius="15"
-                                    Background="#DBEAFE">
+                                    Background="#F1E8FF">
                                     <TextBlock
                                         Text="✓"
-                                        Foreground="#2563EB"
+                                        Foreground="#7C3AED"
                                         FontWeight="Bold"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"/>

@@ -133,6 +133,14 @@
                     BorderThickness="0"
                     Click="CreateAccountButton_Click"/>
 
+                <Button
+                    x:Name="CancelRegistrationButton"
+                    HorizontalAlignment="Center"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Foreground="{ThemeResource SecondaryTextBrush}"
+                    Click="CancelRegistrationButton_Click" />
+
             </StackPanel>
 
         </Border>

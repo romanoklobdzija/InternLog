@@ -36,6 +36,8 @@ public sealed partial class ViewInternshipPage : Page
 
     private void ApplyLanguage()
     {
+        BackButtonText.Text = LocalizationService.Get("BackToInternships");
+
         InternshipDetailsTitleText.Text =
             LocalizationService.Get("InternshipDetails");
 
@@ -113,7 +115,7 @@ public sealed partial class ViewInternshipPage : Page
                 _internship.DisplayJournalStatus,
                 _internship.DailyLogs.Count);
 
-        if (_internship.Status == "Cancelled")
+        if (_internship.Status != "Approved")
         {
             SubmitJournalButton.IsEnabled = false;
             CancelInternshipButton.IsEnabled = false;
@@ -145,7 +147,7 @@ public sealed partial class ViewInternshipPage : Page
         RoutedEventArgs e)
     {
         if (_internship == null ||
-            _internship.Status == "Cancelled")
+            _internship.Status != "Approved")
             return;
 
         Frame.Navigate(
@@ -158,7 +160,7 @@ public sealed partial class ViewInternshipPage : Page
         RoutedEventArgs e)
     {
         if (_internship == null ||
-            _internship.Status == "Cancelled" ||
+            _internship.Status != "Approved" ||
             _internship.JournalStatus == "Pending" ||
             _internship.JournalStatus == "Approved")
             return;
@@ -193,7 +195,7 @@ public sealed partial class ViewInternshipPage : Page
             .FirstOrDefaultAsync(i => i.Id == _internshipId);
 
         if (internship == null ||
-            internship.Status == "Cancelled" ||
+            internship.Status != "Approved" ||
             internship.JournalStatus == "Pending" ||
             internship.JournalStatus == "Approved")
             return;
@@ -218,7 +220,7 @@ public sealed partial class ViewInternshipPage : Page
         RoutedEventArgs e)
     {
         if (_internship == null ||
-            _internship.Status == "Cancelled")
+            _internship.Status != "Approved")
             return;
 
         var keepButton = new Button
@@ -291,7 +293,7 @@ public sealed partial class ViewInternshipPage : Page
             .FirstOrDefaultAsync(i => i.Id == _internshipId);
 
         if (internshipToCancel == null ||
-            internshipToCancel.Status == "Cancelled")
+            internshipToCancel.Status != "Approved")
             return;
 
         if (internshipToCancel.Employer != null)
@@ -300,6 +302,7 @@ public sealed partial class ViewInternshipPage : Page
         internshipToCancel.Status = "Cancelled";
 
         await db.SaveChangesAsync();
+        await InternshipNotificationService.RefreshForCurrentUserAsync();
 
         if (Frame.CanGoBack)
             Frame.GoBack();
@@ -316,5 +319,11 @@ public sealed partial class ViewInternshipPage : Page
         };
 
         await dialog.ShowAsync();
+    }
+
+    private void BackButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (Frame.CanGoBack)
+            Frame.GoBack();
     }
 }

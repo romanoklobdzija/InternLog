@@ -15,7 +15,7 @@
                 Margin="48,40"
                 Spacing="24"
                 MaxWidth="1150"
-                HorizontalAlignment="Center">
+                HorizontalAlignment="Stretch">
 
                 <StackPanel Spacing="6">
 
@@ -50,7 +50,7 @@
                                 Width="110"
                                 Height="110"
                                 CornerRadius="55"
-                                Background="#E8F0FE"
+                                Background="#F1E8FF"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Center">
 
@@ -66,7 +66,7 @@
                                         Text="?"
                                         FontSize="36"
                                         FontWeight="Bold"
-                                        Foreground="#2563EB"
+                                        Foreground="#7C3AED"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"/>
 

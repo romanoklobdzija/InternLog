@@ -2,7 +2,8 @@
 <Page
     x:Class="InternLog.Pages.DashboardPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lvc="using:LiveChartsCore.SkiaSharpView.WinUI">
 
     <Grid Background="{ThemeResource AppBackgroundBrush}">
         <ScrollViewer
@@ -139,33 +140,11 @@
                                 FontWeight="SemiBold"
                                 Foreground="{ThemeResource PrimaryTextBrush}"/>
 
-                            <ItemsControl
-                                x:Name="LogsPerInternshipItemsControl">
-
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-
-                                        <Grid Margin="0,0,0,12">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <TextBlock
-                                                Text="{Binding EmployerName}"
-                                                Foreground="{ThemeResource PrimaryTextBrush}"/>
-
-                                            <TextBlock
-                                                Grid.Column="1"
-                                                Text="{Binding LogCount}"
-                                                FontWeight="SemiBold"
-                                                Foreground="{ThemeResource SecondaryTextBrush}"/>
-                                        </Grid>
-
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-
-                            </ItemsControl>
+                            <lvc:CartesianChart
+                                Height="250"
+                                Series="{x:Bind InternshipLogSeries}"
+                                XAxes="{x:Bind InternshipLogAxes}"
+                                LegendPosition="Hidden" />
                         </StackPanel>
                     </Border>
 
@@ -183,36 +162,33 @@
                                 FontWeight="SemiBold"
                                 Foreground="{ThemeResource PrimaryTextBrush}"/>
 
-                            <ItemsControl
-                                x:Name="JournalStatusItemsControl">
-
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-
-                                        <Grid Margin="0,0,0,12">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <TextBlock
-                                                Text="{Binding Status}"
-                                                Foreground="{ThemeResource PrimaryTextBrush}"/>
-
-                                            <TextBlock
-                                                Grid.Column="1"
-                                                Text="{Binding Count}"
-                                                FontWeight="SemiBold"
-                                                Foreground="{ThemeResource SecondaryTextBrush}"/>
-                                        </Grid>
-
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-
-                            </ItemsControl>
+                            <lvc:PieChart
+                                Height="250"
+                                Series="{x:Bind JournalStatusSeries}"
+                                LegendPosition="Right" />
                         </StackPanel>
                     </Border>
                 </Grid>
+
+                <Border
+                    Background="{ThemeResource CardBackgroundBrush}"
+                    CornerRadius="12"
+                    Padding="24">
+
+                    <StackPanel Spacing="16">
+                        <TextBlock
+                            x:Name="HoursTrendTitleText"
+                            FontSize="20"
+                            FontWeight="SemiBold"
+                            Foreground="{ThemeResource PrimaryTextBrush}" />
+
+                        <lvc:CartesianChart
+                            Height="260"
+                            Series="{x:Bind HoursTrendSeries}"
+                            XAxes="{x:Bind HoursTrendAxes}"
+                            LegendPosition="Hidden" />
+                    </StackPanel>
+                </Border>
 
                 <Border
                     Background="{ThemeResource CardBackgroundBrush}"

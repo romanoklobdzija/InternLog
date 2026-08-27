@@ -18,56 +18,93 @@
 
             <ResourceDictionary.ThemeDictionaries>
 
+                <!-- Fallback for controls whose visual state resolves the Default theme. -->
+                <ResourceDictionary x:Key="Default">
+                    <SolidColorBrush
+                        x:Key="PrimaryButtonBrush"
+                        Color="#7C3AED"/>
+                    <SolidColorBrush
+                        x:Key="PrimaryButtonTextBrush"
+                        Color="#FFFFFF"/>
+                    <SolidColorBrush
+                        x:Key="ButtonBackground"
+                        Color="#7C3AED"/>
+                    <SolidColorBrush
+                        x:Key="ButtonForeground"
+                        Color="#FFFFFF"/>
+                    <SolidColorBrush
+                        x:Key="ButtonBorderBrush"
+                        Color="#7C3AED"/>
+                    <SolidColorBrush
+                        x:Key="ButtonBackgroundPointerOver"
+                        Color="#EEE7F7"/>
+                    <SolidColorBrush
+                        x:Key="ButtonForegroundPointerOver"
+                        Color="#241B32"/>
+                    <SolidColorBrush
+                        x:Key="ButtonBorderBrushPointerOver"
+                        Color="#D8C9EA"/>
+                    <SolidColorBrush
+                        x:Key="ButtonBackgroundPressed"
+                        Color="#DDD1EE"/>
+                    <SolidColorBrush
+                        x:Key="ButtonForegroundPressed"
+                        Color="#241B32"/>
+                    <SolidColorBrush
+                        x:Key="ButtonBorderBrushPressed"
+                        Color="#C3AEDC"/>
+                </ResourceDictionary>
+
                 <ResourceDictionary
                     x:Key="Light">
 
                     <SolidColorBrush
                         x:Key="AppBackgroundBrush"
-                        Color="#F5F6F8"/>
+                        Color="#F5F1EB"/>
 
                     <SolidColorBrush
                         x:Key="CardBackgroundBrush"
-                        Color="#FFFFFF"/>
+                        Color="#FFFCF7"/>
 
                     <SolidColorBrush
                         x:Key="NavigationBackgroundBrush"
-                        Color="#FFFFFF"/>
+                        Color="#23212B"/>
 
                     <SolidColorBrush
                         x:Key="NavigationButtonBrush"
-                        Color="#F3F4F6"/>
+                        Color="#2F2B3A"/>
 
                     <SolidColorBrush
                         x:Key="NavigationButtonTextBrush"
-                        Color="#111827"/>
+                        Color="#FFF9F0"/>
 
                     <SolidColorBrush
                         x:Key="PrimaryTextBrush"
-                        Color="#111827"/>
+                        Color="#25212A"/>
 
                     <SolidColorBrush
                         x:Key="SecondaryTextBrush"
-                        Color="#6B7280"/>
+                        Color="#746C79"/>
 
                     <SolidColorBrush
                         x:Key="BorderBrush"
-                        Color="#E5E7EB"/>
+                        Color="#E0D6CA"/>
 
                     <SolidColorBrush
                         x:Key="InputBackgroundBrush"
-                        Color="#FFFFFF"/>
+                        Color="#FFFDF9"/>
 
                     <SolidColorBrush
                         x:Key="InputTextBrush"
-                        Color="#111827"/>
+                        Color="#25212A"/>
 
                     <SolidColorBrush
                         x:Key="InputBorderBrush"
-                        Color="#D1D5DB"/>
+                        Color="#D2C5B7"/>
 
                     <SolidColorBrush
                         x:Key="PrimaryButtonBrush"
-                        Color="#3B82F6"/>
+                        Color="#7C3AED"/>
 
                     <SolidColorBrush
                         x:Key="PrimaryButtonTextBrush"
@@ -75,7 +112,7 @@
 
                     <SolidColorBrush
                         x:Key="ButtonBackground"
-                        Color="#3B82F6"/>
+                        Color="#7C3AED"/>
 
                     <SolidColorBrush
                         x:Key="ButtonForeground"
@@ -83,31 +120,31 @@
 
                     <SolidColorBrush
                         x:Key="ButtonBorderBrush"
-                        Color="#3B82F6"/>
+                        Color="#7C3AED"/>
 
                     <SolidColorBrush
                         x:Key="ButtonBackgroundPointerOver"
-                        Color="#2563EB"/>
+                        Color="#EEE7F7"/>
 
                     <SolidColorBrush
                         x:Key="ButtonForegroundPointerOver"
-                        Color="#FFFFFF"/>
+                        Color="#241B32"/>
 
                     <SolidColorBrush
                         x:Key="ButtonBorderBrushPointerOver"
-                        Color="#2563EB"/>
+                        Color="#D8C9EA"/>
 
                     <SolidColorBrush
                         x:Key="ButtonBackgroundPressed"
-                        Color="#2563EB"/>
+                        Color="#DDD1EE"/>
 
                     <SolidColorBrush
                         x:Key="ButtonForegroundPressed"
-                        Color="#FFFFFF"/>
+                        Color="#241B32"/>
 
                     <SolidColorBrush
                         x:Key="ButtonBorderBrushPressed"
-                        Color="#2563EB"/>
+                        Color="#C3AEDC"/>
 
                     <SolidColorBrush
                         x:Key="TextControlBackgroundPointerOver"
@@ -180,51 +217,51 @@
 
                     <SolidColorBrush
                         x:Key="AppBackgroundBrush"
-                        Color="#111827"/>
+                        Color="#18151E"/>
 
                     <SolidColorBrush
                         x:Key="CardBackgroundBrush"
-                        Color="#1F2937"/>
+                        Color="#25202D"/>
 
                     <SolidColorBrush
                         x:Key="NavigationBackgroundBrush"
-                        Color="#172033"/>
+                        Color="#100E15"/>
 
                     <SolidColorBrush
                         x:Key="NavigationButtonBrush"
-                        Color="#1F2937"/>
+                        Color="#211C29"/>
 
                     <SolidColorBrush
                         x:Key="NavigationButtonTextBrush"
-                        Color="#F9FAFB"/>
+                        Color="#FFF8F0"/>
 
                     <SolidColorBrush
                         x:Key="PrimaryTextBrush"
-                        Color="#F9FAFB"/>
+                        Color="#F9F3EB"/>
 
                     <SolidColorBrush
                         x:Key="SecondaryTextBrush"
-                        Color="#9CA3AF"/>
+                        Color="#B9AFBD"/>
 
                     <SolidColorBrush
                         x:Key="BorderBrush"
-                        Color="#374151"/>
+                        Color="#403747"/>
 
                     <SolidColorBrush
                         x:Key="InputBackgroundBrush"
-                        Color="#1F2937"/>
+                        Color="#211C29"/>
 
                     <SolidColorBrush
                         x:Key="InputTextBrush"
-                        Color="#F9FAFB"/>
+                        Color="#F9F3EB"/>
 
                     <SolidColorBrush
                         x:Key="InputBorderBrush"
-                        Color="#4B5563"/>
+                        Color="#51465A"/>
 
                     <SolidColorBrush
                         x:Key="PrimaryButtonBrush"
-                        Color="#3B82F6"/>
+                        Color="#A78BFA"/>
 
                     <SolidColorBrush
                         x:Key="PrimaryButtonTextBrush"
@@ -232,7 +269,7 @@
 
                     <SolidColorBrush
                         x:Key="ButtonBackground"
-                        Color="#3B82F6"/>
+                        Color="#A78BFA"/>
 
                     <SolidColorBrush
                         x:Key="ButtonForeground"
@@ -240,31 +277,31 @@
 
                     <SolidColorBrush
                         x:Key="ButtonBorderBrush"
-                        Color="#3B82F6"/>
+                        Color="#A78BFA"/>
 
                     <SolidColorBrush
                         x:Key="ButtonBackgroundPointerOver"
-                        Color="#3B82F6"/>
+                        Color="#E7DDF1"/>
 
                     <SolidColorBrush
                         x:Key="ButtonForegroundPointerOver"
-                        Color="#FFFFFF"/>
+                        Color="#241B32"/>
 
                     <SolidColorBrush
                         x:Key="ButtonBorderBrushPointerOver"
-                        Color="#3B82F6"/>
+                        Color="#D5C4E5"/>
 
                     <SolidColorBrush
                         x:Key="ButtonBackgroundPressed"
-                        Color="#2563EB"/>
+                        Color="#D4C4E4"/>
 
                     <SolidColorBrush
                         x:Key="ButtonForegroundPressed"
-                        Color="#FFFFFF"/>
+                        Color="#241B32"/>
 
                     <SolidColorBrush
                         x:Key="ButtonBorderBrushPressed"
-                        Color="#2563EB"/>
+                        Color="#C1ABD9"/>
 
                     <SolidColorBrush
                         x:Key="TextControlBackgroundPointerOver"

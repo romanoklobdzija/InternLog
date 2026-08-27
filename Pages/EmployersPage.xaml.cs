@@ -73,26 +73,26 @@ public sealed partial class EmployersPage : Page
             if (container == null)
                 continue;
 
-            var textBlock =
-                FindVisualChild<TextBlock>(
+            var button =
+                FindVisualChild<Button>(
                     container,
-                    "ViewDetailsButtonText");
+                    string.Empty);
 
-            if (textBlock != null)
+            if (button != null)
             {
-                textBlock.Text =
+                button.Content =
                     LocalizationService.Get("ViewDetails");
             }
         }
     }
 
-    private void ViewDetailsButtonText_Loaded(
+    private void ViewDetailsButton_Loaded(
         object sender,
         RoutedEventArgs e)
     {
-        if (sender is TextBlock textBlock)
+        if (sender is Button button)
         {
-            textBlock.Text =
+            button.Content =
                 LocalizationService.Get("ViewDetails");
         }
     }

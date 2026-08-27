@@ -82,7 +82,7 @@ public sealed partial class EmployerDetailsPage : Page
             .AnyAsync(i =>
                 i.UserId == SessionService.CurrentUser.Id &&
                 i.EmployerId == _employer.Id &&
-                i.Status != "Cancelled");
+                i.Status == "Approved");
         if (alreadyReserved)
         {
             ReserveButton.Content = LocalizationService.Get("Reserved");
@@ -115,7 +115,7 @@ public sealed partial class EmployerDetailsPage : Page
             .AnyAsync(i =>
                 i.UserId == SessionService.CurrentUser.Id &&
                 i.EmployerId == employer.Id &&
-                i.Status != "Cancelled");
+                i.Status == "Approved");
         if (alreadyReserved)
         {
             await ShowMessage(LocalizationService.Get("AlreadyReserved"));
@@ -130,18 +130,44 @@ public sealed partial class EmployerDetailsPage : Page
         int internshipCount = await db.Internships
             .CountAsync(i =>
                 i.UserId == SessionService.CurrentUser.Id &&
-                i.Status != "Cancelled");
+                i.Status == "Approved");
         if (internshipCount >= 3)
         {
             await ShowMessage(LocalizationService.Get("MaximumInternships"));
             return;
         }
+        var startDatePicker = new CalendarDatePicker
+        {
+            Header = LocalizationService.Get("StartDate"),
+            Date = DateTimeOffset.Now.Date,
+            MinDate = DateTimeOffset.Now.Date
+        };
+        var endDatePicker = new CalendarDatePicker
+        {
+            Header = LocalizationService.Get("EndDate"),
+            Date = DateTimeOffset.Now.Date.AddDays(30),
+            MinDate = DateTimeOffset.Now.Date.AddDays(1)
+        };
+
+        startDatePicker.DateChanged += (_, _) =>
+        {
+            if (startDatePicker.Date.HasValue)
+                endDatePicker.MinDate = startDatePicker.Date.Value.Date.AddDays(1);
+        };
+
+        var content = new StackPanel { Spacing = 12 };
+        content.Children.Add(new TextBlock
+        {
+            Text = string.Format(LocalizationService.Get("ReserveInternshipMessage"), employer.Name),
+            TextWrapping = TextWrapping.Wrap
+        });
+        content.Children.Add(startDatePicker);
+        content.Children.Add(endDatePicker);
+
         var dialog = new ContentDialog
         {
             Title = LocalizationService.Get("ReserveInternshipQuestion"),
-            Content = string.Format(
-                LocalizationService.Get("ReserveInternshipMessage"),
-                employer.Name),
+            Content = content,
             PrimaryButtonText = LocalizationService.Get("ConfirmReservation"),
             CloseButtonText = LocalizationService.Get("Cancel"),
             DefaultButton = ContentDialogButton.Primary,
@@ -150,17 +176,25 @@ public sealed partial class EmployerDetailsPage : Page
         var result = await dialog.ShowAsync();
         if (result != ContentDialogResult.Primary)
             return;
+
+        if (!startDatePicker.Date.HasValue || !endDatePicker.Date.HasValue ||
+            endDatePicker.Date.Value.Date <= startDatePicker.Date.Value.Date)
+        {
+            await ShowMessage(LocalizationService.Get("InvalidInternshipDates"));
+            return;
+        }
         var internship = new Internship
         {
             UserId = SessionService.CurrentUser.Id,
             EmployerId = employer.Id,
-            StartDate = DateTime.Today,
-            EndDate = null,
+            StartDate = startDatePicker.Date.Value.DateTime.Date,
+            EndDate = endDatePicker.Date.Value.DateTime.Date,
             Status = "Approved"
         };
         db.Internships.Add(internship);
         employer.StudentCapacity--;
         await db.SaveChangesAsync();
+        await InternshipNotificationService.RefreshForCurrentUserAsync();
         _employer.StudentCapacity = employer.StudentCapacity;
         PositionsText.Text = employer.StudentCapacity.ToString();
         UpdateReservationButton();

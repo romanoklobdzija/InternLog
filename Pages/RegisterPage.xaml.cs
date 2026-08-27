@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -26,6 +27,14 @@ namespace InternLog.Pages;
 /// </summary>
 public sealed partial class RegisterPage : Page
 {
+    private static readonly Regex EmailPattern = new(
+        @"^[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z]{2,}$",
+        RegexOptions.Compiled);
+
+    private static readonly Regex PasswordPattern = new(
+        @"^[A-Za-z0-9]{8,}$",
+        RegexOptions.Compiled);
+
     public RegisterPage()
     {
         InitializeComponent();
@@ -53,6 +62,7 @@ public sealed partial class RegisterPage : Page
         ConfirmPasswordLabelText.Text = LocalizationService.Get("ConfirmPassword");
         ConfirmPasswordBox.PlaceholderText = LocalizationService.Get("ConfirmPasswordPlaceholder");
         CreateAccountButton.Content = LocalizationService.Get("CreateAccount");
+        CancelRegistrationButton.Content = LocalizationService.Get("Cancel");
     }
 
     private async void CreateAccountButton_Click(
@@ -72,6 +82,18 @@ public sealed partial class RegisterPage : Page
             string.IsNullOrWhiteSpace(password))
         {
             await ShowMessage(LocalizationService.Get("FillAllFields"));
+            return;
+        }
+
+        if (!EmailPattern.IsMatch(email))
+        {
+            await ShowMessage(LocalizationService.Get("InvalidEmail"));
+            return;
+        }
+
+        if (!PasswordPattern.IsMatch(password))
+        {
+            await ShowMessage(LocalizationService.Get("InvalidPassword"));
             return;
         }
 
@@ -116,6 +138,11 @@ public sealed partial class RegisterPage : Page
         };
 
         await dialog.ShowAsync();
+    }
+
+    private void CancelRegistrationButton_Click(object sender, RoutedEventArgs e)
+    {
+        Frame.Navigate(typeof(LoginPage));
     }
 
 
